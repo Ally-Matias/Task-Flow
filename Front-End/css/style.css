@@ -1,0 +1,122 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #01072D;
+}
+
+.container {
+  display: flex;
+}
+
+.sidebar {
+  background-color: #1e1e1e;
+  width: 200px;
+  height: auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  margin-bottom: 20px;
+}
+
+.menu {
+  /* Adicione estilos para o menu, se necessário */
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+/*    Tasks      */
+
+.widget_title_text{
+    color: #FFFFFF;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.widget_title_bar{
+    width: 50px;
+    height: 4px;
+    background-color: #FFF;
+    margin-top: 7px
+}
+
+.container_tasks{
+    display: flex;
+    height: 1000px;
+    justify-content: space-between;
+    width: 95%;
+    max-width: auto;
+}
+
+.all_tasks{
+    display: flex;
+    flex: 3;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: auto;
+}
+
+
+#tasks{
+    display: flex;
+    justify-content:flex-end;
+    background-color: #01072D;
+}
+
+
+
+.task1,.task2,.task3,.task4,
+.task5,.task6, .task7, .task8{
+    color: #FFF;
+    padding: 15px;
+    margin: 10px;
+    background-color: #0D1321;
+    border-radius: 10px;
+    width: 210px;
+    height: 210px;
+}
+
+
+.widget_body{
+    color: #FFF;
+    font-weight: bold;
+}
+
+
+/*  Footer */
+
+footer{
+    background-color: #1e1e1e;
+    display: flex;
+    justify-content: center;
+}
+
+.footer_area a{
+    display: block;
+    color: #FFF;
+    text-decoration: none;
+}
+
+.footer_area{
+    display: flex;
+}
+
+.area{
+    flex: 1;
+    color: #FFF;
+}
+
+.flexColumn{
+    flex-direction: column;
+}
+
