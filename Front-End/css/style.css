@@ -172,7 +172,7 @@ span.titulo{
   background: #57cc99;
 }
 .botaoAdd:hover {
-  background: #1e1e1e;
+  background: #0D1321;
   color: #57cc99;
 }
 
@@ -192,7 +192,7 @@ span.titulo{
   background: #d90429;
 }
 .botaoRm:hover {
-  background: #1e1e1e;
+  background: #0D1321;
   color: #d90429;
 }
 
@@ -213,7 +213,7 @@ span.titulo{
   background: #2c0b8e;
 }
 .botaoEd:hover {
-  background: #1e1e1e;
+  background: #0D1321;
   color: #2c0b8e;
 }
 
