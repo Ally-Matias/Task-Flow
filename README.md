@@ -17,7 +17,7 @@
   <pre align="justify">
 &#x2022 <b>Envio de dados utilizando Sockets TCP ou Datagrama UDP.</b>
 </pre>
-  <p align="justify">O TaskFlow utiliza a biblioteca <a href="https://socket.io/docs/v4/"><b>Socket.IO</b></a> para
+  <p align="justify">O TaskFlow utiliza a biblioteca <a href="https://socket.io/docs/v4/" target="_blank"><b>Socket.IO</b></a> para
     permitir uma comunicação bidirecional em tempo real entre <b>clientes</b> e <b>servidor</b> através de
     <b>WebSockets</b>, garantindo eficiência e confiabilidade no envio e recebimento de dados entre os desenvolvedores
     conectados ao sistema.</p>
@@ -28,17 +28,24 @@
   <pre align="justify">
 &#x2022 <b>Representação externa de dados.</b>
 </pre>
-<p>O TaskFlow utiliza o <a href="https://www.mongodb.com/docs/"><b>MongoDB</b></a> como banco de dados para armazenar e recuperar os dados do sistema. O MongoDB é um banco de dados <b>NoSQL</b> que trabalha com documentos <b>JSON</b>, o que facilita a representação externa dos dados. Os desenvolvedores podem interagir com o banco de dados MongoDB para armazenar informações relacionadas a tarefas, usuários, mensagens e outros dados relevantes do sistema.</p>
+<p>O TaskFlow utiliza o <a href="https://www.mongodb.com/docs/" target="_blank"><b>MongoDB</b></a> como banco de dados para armazenar e recuperar os dados do sistema. O MongoDB é um banco de dados <b>NoSQL</b> que trabalha com documentos <b>JSON</b>, o que facilita a representação externa dos dados. Os desenvolvedores podem interagir com o banco de dados MongoDB para armazenar informações relacionadas a tarefas, usuários, mensagens e outros dados relevantes do sistema.</p>
   <pre align="justify">
 &#x2022 <b>Comunicação por filas.</b>
 </pre>
 </div>
 <div>
   <h3><b>Requisitos específicos:</b></h3>
+  <p><b>Privacidade:</b></p>
   <pre>
-&#x2022 <b>Privacidade.</b>
-&#x2022 <b>Confiabilidade.</b>
-&#x2022 <b>Escalabilidade.</b>
+&#x2022 Garantir a privacidade dos dados dos usuários e tarefas no sistema.
+</pre>
+  <p><b>Confiabilidade:</b></p>
+  <pre>
+&#x2022 Assegurar a confiabilidade na transmissão e armazenamento dos dados.
+</pre>
+  <p><b>Escalabilidade:</b></p>
+  <pre>
+&#x2022 Permitir que o sistema seja escalável e capaz de lidar com um grande número de usuários e tarefas.
 </pre>
 </div>
 <h2>Stack do Projeto🚀</h2>
