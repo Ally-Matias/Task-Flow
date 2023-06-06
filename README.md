@@ -19,7 +19,7 @@ O <b>TaskFlow</b> é um projeto que visa facilitar a colaboração entre <b>dese
 </pre>
 <h2>Link para o Projeto 🌐</h2>
 <div style="display: inline_block">
-<a href="https://ally-matias.github.io/task-flow/">
+- https://ally-matias.github.io/task-flow/"
 </div>
 <h2>Stack do Projeto 🚀</h2>
 <div style="display: inline_block">
