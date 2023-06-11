@@ -48,7 +48,11 @@
 &#x2022 Permitir que o sistema seja escalável e capaz de lidar com um grande número de usuários e tarefas.
 </pre>
 </div>
-<h2>Stack do Projeto🚀</h2>
+<h2>Link para o Projeto 🌐</h2>
+<div style="display: inline_block">
+&#x2022 https://ally-matias.github.io/Task-Flow/
+</div>
+<h2>Stack do Projeto 🚀</h2>
 <div style="display: inline_block">
   <img align="center" alt="logo" height="45" width="45"
     src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-plain.svg" />

@@ -134,6 +134,7 @@ h2{
     border-radius: 10px;
     width: 210px;
     height: 210px;
+    border: solid 1px #424141;
 }
 
 
@@ -152,8 +153,26 @@ span.titulo{
 /* Menu sidebar */
 
 .menu{
-  margin-left: 35px;
-  margin-top: 200px;
+  margin-left: 15px;
+  margin-top:180px;
+}
+
+.task-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.task-input input {
+  width: 140px;
+  height: 30px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  font-size: 15px;
+  border: 1px solid #FFFFFF;
+  border-radius: 5px;
+  outline: none;
 }
 
 .botaoAdd {
@@ -172,7 +191,7 @@ span.titulo{
   background: #57cc99;
 }
 .botaoAdd:hover {
-  background: #0D1321;
+  background: #1e1e1e;
   color: #57cc99;
 }
 
@@ -232,4 +251,53 @@ span.titulo{
     height: 2210px;
   }
 
+}
+
+
+@media(max-width:450px){
+  .botaoAdd {
+  min-width: 90px;
+  height: 35px;
+}
+
+.sidebar {
+  width: 160px;
+}
+
+.task{
+  width: 160px;
+  height: 210px;
+}
+
+.widget_title_text{
+  font-size: 20px;
+}
+
+.widget_title_bar{
+  width: 35px;
+  height: 4px;
+}
+
+.searchTerm {
+  width: 100px;
+  margin-left: -30px;
+}
+
+.task-input input {
+  width: 100px;
+  height: 30px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  font-size: 13px;
+
+}
+
+}
+
+@media(max-width:450px){
+  .botaoAdd {
+  min-width: 90px;
+  height: 35px;
+  margin-left: -18px;
+}
 }
