@@ -1,4 +1,4 @@
-<div style="text-align: center;"><h1 align="center"><img src="Front-End/assets/img/logoReadme.png" alt="logo" width="33" height="33">TaskFlow</h1>
+<div style="text-align: center;"> <h1 align="center"><img src="Front-End/assets/img/logoReadme.png" alt="logo" width="33" height="33">TaskFlow</h1>
 <p align="center">
 <img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/>
 </p>
@@ -19,7 +19,7 @@ O <b>TaskFlow</b> é um projeto que visa facilitar a colaboração entre <b>dese
 </pre>
 <h2>Link para o Projeto 🌐</h2>
 <div style="display: inline_block">
-- https://ally-matias.github.io/task-flow/
+- https://ally-matias.github.io/Task-Flow/
 </div>
 <h2>Stack do Projeto 🚀</h2>
 <div style="display: inline_block">
