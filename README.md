@@ -12,26 +12,34 @@
     atendesse a uma série de especificações:
   </p>
 </div>
-<div>
+<div align="justify">
   <h3><b>Requisitos principais:</b></h3>
   <pre align="justify">
 &#x2022 <b>Envio de dados utilizando Sockets TCP ou Datagrama UDP.</b>
 </pre>
-  <p align="justify">O TaskFlow utiliza a biblioteca <a href="https://socket.io/docs/v4/" target="_blank"><b>Socket.IO</b></a> para
+  <p align="justify">O TaskFlow utiliza a biblioteca <a href="https://socket.io/docs/v4/"
+      target="_blank"><b>Socket.IO</b></a> para
     permitir uma comunicação bidirecional em tempo real entre <b>clientes</b> e <b>servidor</b> através de
     <b>WebSockets</b>, garantindo eficiência e confiabilidade no envio e recebimento de dados entre os desenvolvedores
     conectados ao sistema.</p>
   <pre align="justify">
 &#x2022 <b>Protocolo Requisição/Resposta.</b>
 </pre>
-<p>No TaskFlow, o protocolo <b>HTTP</b> será utilizado para gerenciar as <b>requisições</b> e <b>respostas</b> entre os clientes e o servidor. Os clientes enviarão requisições <b>HTTP</b> para o servidor, que processará essas solicitações e enviará as respostas correspondentes de volta aos clientes.</p>
+  <p>No TaskFlow, o protocolo <b>HTTP</b> será utilizado para gerenciar as <b>requisições</b> e <b>respostas</b> entre
+    os clientes e o servidor. Os clientes enviarão requisições <b>HTTP</b> para o servidor, que processará essas
+    solicitações e enviará as respostas correspondentes de volta aos clientes.</p>
   <pre align="justify">
 &#x2022 <b>Representação externa de dados.</b>
 </pre>
-<p>O TaskFlow utiliza o <a href="https://www.mongodb.com/docs/" target="_blank"><b>MongoDB</b></a> como banco de dados para armazenar e recuperar os dados do sistema. O MongoDB é um banco de dados <b>NoSQL</b> que trabalha com documentos <b>JSON</b>, o que facilita a representação externa dos dados. Os desenvolvedores podem interagir com o banco de dados MongoDB para armazenar informações relacionadas a tarefas, usuários, mensagens e outros dados relevantes do sistema.</p>
+  <p>O TaskFlow utiliza o <a href="https://www.mongodb.com/docs/" target="_blank"><b>MongoDB</b></a> como banco de dados
+    para armazenar e recuperar os dados do sistema. O MongoDB é um banco de dados <b>NoSQL</b> que trabalha com
+    documentos <b>JSON</b>, o que facilita a representação externa dos dados. Os desenvolvedores podem interagir com o
+    banco de dados MongoDB para armazenar informações relacionadas a tarefas, usuários, mensagens e outros dados
+    relevantes do sistema.</p>
   <pre align="justify">
 &#x2022 <b>Comunicação por filas.</b>
 </pre>
+  <p>O Taskflow utiliza o <a href="https://redis.io/docs/"><b>Redis</b></a> em conjunto com <a href="https://jwt.io/introduction"><b>JWT</b></a> para o armazenamento de sessão. O JWT é usado para autenticação e autorização, enquanto o Redis é utilizado como um banco de dados em memória para armazenar as informações da sessão dos usuários. Essa combinação permite a autenticação segura dos usuários e o armazenamento eficiente das informações da sessão no Redis. </p>
 </div>
 <div>
   <h3><b>Requisitos específicos:</b></h3>
@@ -50,7 +58,7 @@
 </div>
 <h2>Link para o Projeto 🌐</h2>
 <div style="display: inline_block">
-&#x2022 https://ally-matias.github.io/Task-Flow/
+  &#x2022 https://ally-matias.github.io/Task-Flow/
 </div>
 <h2>Stack do Projeto 🚀</h2>
 <div style="display: inline_block">
