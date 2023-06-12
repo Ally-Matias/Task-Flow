@@ -53,7 +53,7 @@
 </pre>
   <p><b>Escalabilidade:</b></p>
   <pre>
-&#x2022 Permitir que o sistema seja escalável e capaz de lidar com um grande número de usuários e tarefas.
+&#x2022 Permitir que o sistema seja capaz de lidar com um grande número de usuários e tarefas.
 </pre>
 </div>
 <h2>Link para o Projeto 🌐</h2>
