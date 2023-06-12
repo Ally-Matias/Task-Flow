@@ -39,7 +39,7 @@
   <pre align="justify">
 &#x2022 <b>Comunicação por filas.</b>
 </pre>
-  <p>O Taskflow utiliza o <a href="https://redis.io/docs/"><b>Redis</b></a> em conjunto com <a href="https://jwt.io/introduction"><b>JWT</b></a> para o armazenamento de sessão. O JWT é usado para autenticação e autorização, enquanto o Redis é utilizado como um banco de dados em memória para armazenar as informações da sessão dos usuários. Essa combinação permite a autenticação segura dos usuários e o armazenamento eficiente das informações da sessão no Redis. </p>
+  <p>O Taskflow utiliza o <a href="https://redis.io/docs/"><b>Redis</b></a> em conjunto com <a href="https://jwt.io/introduction"><b>JWT</b></a> para o armazenamento de sessão. O JWT é usado para <b>autenticação</b> e <b>autorização</b>, enquanto o Redis é utilizado como um banco de dados em memória para armazenar as informações da <b>sessão</b> dos usuários. Essa combinação permite a <b>autenticação segura</b> dos usuários e o armazenamento eficiente das informações da sessão no Redis. </p>
 </div>
 <div>
   <h3><b>Requisitos específicos:</b></h3>
