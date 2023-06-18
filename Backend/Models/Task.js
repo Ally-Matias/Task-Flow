@@ -1,6 +1,7 @@
 const mongoose = require("../db/Conn");
 const { Schema } = mongoose;
 
+// Define o modelo "Task" utilizando o Mongoose.
 const Task = mongoose.model(
     'Task',
     new Schema({
@@ -19,8 +20,8 @@ const Task = mongoose.model(
         user: Object,
     }, {
         timestamps: true
-    }),
-
+    })
 );
 
+// Exporta o modelo "Task" para uso em outros módulos.
 module.exports = Task;

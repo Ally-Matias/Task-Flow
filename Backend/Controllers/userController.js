@@ -1,19 +1,20 @@
-//packets
+// Importação de pacotes.
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const validator = require('email-validator');
 
-//models
+// Importação de modelos.
 const User = require('../Models/User');
 
-//helpers
+// Importação de helpers.
 const createUserToken = require('../Helpers/create-user-token');
 const getToken = require('../Helpers/get-token');
 
 module.exports = class userController {
-
+    
+    // Método para registrar um usuário.
     static async register(req, res) {
-
+        // Extração dos dados da requisição.
         const {
             name,
             email,
@@ -21,8 +22,10 @@ module.exports = class userController {
             confirmpassword
         } = req.body;
 
+        // Validação do e-mail utilizando email-validator.
         const eValid = validator.validate(email);
-        //validações
+
+        // Validações.
         if (!name) {
             res.status(422).json({
                 message: 'O nome é obrigatório!'
@@ -64,10 +67,9 @@ module.exports = class userController {
             });
             return;
         }
-        //check se o usuário existe
-        const userExists = await User.findOne({
-            email: email
-        });
+
+        // Verifica se o usuário já existe.
+        const userExists = await User.findOne({ email: email });
         if (userExists) {
             res.status(422).json({
                 message: 'Já existe um usuário cadastrado com esse e-mail!'
@@ -75,11 +77,11 @@ module.exports = class userController {
             return;
         }
 
-        //criar senha
+        // Criptografa a senha.
         const salt = await bcrypt.genSalt(12);
         const passwordHash = await bcrypt.hash(password, salt);
 
-        //criar usuário
+        // Cria um novo usuário.
         const user = new User({
             name: name,
             email: email,
@@ -95,16 +97,18 @@ module.exports = class userController {
         }
     };
 
+    // Método para realizar o login de um usuário.
     static async login(req, res) {
-
+        // Extração dos dados da requisição.
         const {
             email,
             password
         } = req.body;
 
+        // Validação do e-mail utilizando email-validator.
         const eValid = validator.validate(email);
 
-        //Validações
+        // Validações.
         if (!email) {
             res.status(422).json({
                 message: 'O e-mail é obrigatório!'
@@ -126,10 +130,8 @@ module.exports = class userController {
             return;
         }
 
-        //check se o usuário existe
-        const user = await User.findOne({
-            email: email
-        });
+        // Verifica se o usuário existe.
+        const user = await User.findOne({ email: email });
         if (!user) {
             res.status(422).json({
                 message: 'Não há usuário cadastrado com esse e-mail!'
@@ -137,7 +139,7 @@ module.exports = class userController {
             return;
         }
 
-        //check password
+        // Verifica a senha.
         const checkPassword = await bcrypt.compare(password, user.password);
 
         if (!checkPassword) {
@@ -145,12 +147,11 @@ module.exports = class userController {
                 message: 'Senha inválida!'
             });
         }
-        await createUserToken(user, req, res)
-
+        await createUserToken(user, req, res);
     };
 
+    // Método para verificar se um usuário está autenticado.
     static async checkUser(req, res) {
-        
         let currentUser;
 
         if (req.headers.authorization) {

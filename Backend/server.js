@@ -3,32 +3,33 @@ const http = require('http');
 const { Server } = require('socket.io');
 const cors = require("cors");
 
-//definição do app
+// Definição do app Express.
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-//solve cors
+// Configuração do CORS.
 app.use(cors({
     credentials: true,
     origin: 'http://localhost:3000'
 }));
 
-//configuração para json response
+// Configuração para o retorno de JSON.
 app.use(express.json());
 
-//public folde for images
+// Pasta pública para imagens.
 app.use(express.static('public'));
 
-//routes
+// Rotas
 const userRoutes = require('./routes/userRoutes');
 
+// Middleware para as rotas relacionadas aos usuários.
 app.use('/users', userRoutes);
 
-// Evento de conexão do Socket.IO
+// Evento de conexão do Socket.IO.
 io.on('connection', (socket) => {
     console.log('Um cliente se conectou');
-
 });
 
+// Inicia o servidor HTTP na porta 5000.
 app.listen(5000);
