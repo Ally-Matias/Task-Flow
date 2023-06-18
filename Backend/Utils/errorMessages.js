@@ -1,0 +1,13 @@
+const errorMessages = {
+    missingName: { statusCode: 422, message: 'O nome é obrigatório!' },
+    missingEmail: { statusCode: 422, message: 'O e-mail é obrigatório!' },
+    invalidEmail: { statusCode: 422, message: 'O e-mail não é válido!' },
+    missingPassword: { statusCode: 422, message: 'A senha é obrigatória!' },
+    missingConfirmPassword: { statusCode: 422, message: 'A confirmação da senha é obrigatória!' },
+    invalidPassword: { statusCode: 422, message: 'Senha inválida!' },
+    notSamePassword: { statusCode: 422, message: 'As senhas precisam ser idênticas!' },
+    userExists: { statusCode: 422, message: 'Já existe um usuário cadastrado com esse e-mail!'},
+    userNotExists: { statusCode: 422, message: 'Não há usuário cadastrado com esse e-mail!'}
+  };
+  
+  module.exports = errorMessages;

@@ -9,9 +9,12 @@ const User = require('../Models/User');
 // Importação de helpers.
 const createUserToken = require('../Helpers/create-user-token');
 const getToken = require('../Helpers/get-token');
+const sendError = require('../Helpers/errorHelper');
+// Importação de utils.
+const errorMessages = require('../Utils/errorMessages');
 
 module.exports = class userController {
-    
+
     // Método para registrar um usuário.
     static async register(req, res) {
         // Extração dos dados da requisição.
@@ -27,54 +30,35 @@ module.exports = class userController {
 
         // Validações.
         if (!name) {
-            res.status(422).json({
-                message: 'O nome é obrigatório!'
-            });
-            return;
+            return sendError(res, errorMessages.missingName.statusCode, errorMessages.missingName.message);
         }
 
         if (!email) {
-            res.status(422).json({
-                message: 'O e-mail é obrigatório!'
-            });
-            return;
+            return sendError(res, errorMessages.missingEmail.statusCode, errorMessages.missingEmail.message);
         }
 
         if (!eValid) {
-            res.status(422).json({
-                message: 'O e-mail não é válido!'
-            });
-            return;
+            return sendError(res, errorMessages.invalidEmail.statusCode, errorMessages.invalidEmail.message);
         }
 
         if (!password) {
-            res.status(422).json({
-                message: 'A senha é obrigatória!'
-            });
-            return;
+            return sendError(res, errorMessages.missingPassword.statusCode, errorMessages.missingPassword.message);
         }
 
         if (!confirmpassword) {
-            res.status(422).json({
-                message: 'A confirmação da senha é obrigatória!'
-            });
-            return;
+            return sendError(res, errorMessages.missingConfirmPassword.statusCode, errorMessages.missingConfirmPassword.message);
         }
 
         if (password !== confirmpassword) {
-            res.status(422).json({
-                message: 'As senhas precisam ser idênticas'
-            });
-            return;
+            return sendError(res, errorMessages.notSamePassword.statusCode, errorMessages.notSamePassword.message);
         }
 
         // Verifica se o usuário já existe.
-        const userExists = await User.findOne({ email: email });
+        const userExists = await User.findOne({
+            email: email
+        });
         if (userExists) {
-            res.status(422).json({
-                message: 'Já existe um usuário cadastrado com esse e-mail!'
-            });
-            return;
+            return sendError(res, errorMessages.userExists.statusCode, errorMessages.userExists.message);
         }
 
         // Criptografa a senha.
@@ -110,42 +94,30 @@ module.exports = class userController {
 
         // Validações.
         if (!email) {
-            res.status(422).json({
-                message: 'O e-mail é obrigatório!'
-            });
-            return;
+            return sendError(res, errorMessages.missingEmail.statusCode, errorMessages.missingEmail.message);
         }
 
         if (!eValid) {
-            res.status(422).json({
-                message: 'O e-mail não é válido!'
-            });
-            return;
+            return sendError(res, errorMessages.invalidEmail.statusCode, errorMessages.invalidEmail.message);
         }
 
         if (!password) {
-            res.status(422).json({
-                message: 'A senha é obrigatória!'
-            });
-            return;
+            return sendError(res, errorMessages.missingPassword.statusCode, errorMessages.missingPassword.message);
         }
 
         // Verifica se o usuário existe.
-        const user = await User.findOne({ email: email });
+        const user = await User.findOne({
+            email: email
+        });
         if (!user) {
-            res.status(422).json({
-                message: 'Não há usuário cadastrado com esse e-mail!'
-            });
-            return;
+            return sendError(res, errorMessages.userNotExists.statusCode, errorMessages.userNotExists.message);
         }
 
         // Verifica a senha.
         const checkPassword = await bcrypt.compare(password, user.password);
 
         if (!checkPassword) {
-            res.status(422).json({
-                message: 'Senha inválida!'
-            });
+            return sendError(res, errorMessages.invalidPassword.statusCode, errorMessages.invalidPassword.message);
         }
         await createUserToken(user, req, res);
     };
