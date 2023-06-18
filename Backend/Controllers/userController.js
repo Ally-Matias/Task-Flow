@@ -10,6 +10,8 @@ const User = require('../Models/User');
 const createUserToken = require('../Helpers/create-user-token');
 const getToken = require('../Helpers/get-token');
 const sendError = require('../Helpers/errorHelper');
+const getUserByToken = require('../Helpers/get-user-by-token');
+
 // Importação de utils.
 const errorMessages = require('../Utils/errorMessages');
 
@@ -124,6 +126,7 @@ module.exports = class userController {
 
     // Método para verificar se um usuário está autenticado.
     static async checkUser(req, res) {
+
         let currentUser;
 
         if (req.headers.authorization) {
@@ -135,5 +138,93 @@ module.exports = class userController {
             currentUser = null;
         }
         res.status(200).send(currentUser);
+    }
+
+    // Método para retornar o usuario pelo Id.
+    static async getUserById(req, res) {
+        const id = req.params.id;
+        const user = await User.findById(id).select('-password');
+
+        if (!user) {
+            return sendError(res, errorMessages.userNotFound.statusCode, errorMessages.userNotFound.message);
+        }
+
+        res.status(200).json({
+            user
+        });
+    }
+
+    static async editUser(req, res) {
+
+        const id = req.params.id;
+
+        const token = getToken(req);
+
+        const user = await getUserByToken(token);
+
+        const {
+            name,
+            email,
+            password,
+            confirmpassword
+        } = req.body;
+
+        let image = '';
+
+        // Validações
+        const eValid = validator.validate(email);
+
+        if (!name) {
+            return sendError(res, errorMessages.missingName.statusCode, errorMessages.missingName.message);
+        }
+        user.name = name;
+
+        if (!email) {
+            return sendError(res, errorMessages.missingEmail.statusCode, errorMessages.missingEmail.message);
+        }
+
+        const userExists = await User.findOne({
+            email: email
+        });
+
+        if (user.email !== email && userExists) {
+            return sendError(res, errorMessages.userNotFound.statusCode, errorMessages.userNotFound.message);
+        }
+
+        if (!eValid) {
+            return sendError(res, errorMessages.invalidEmail.statusCode, errorMessages.invalidEmail.message);
+        }
+
+        user.email = email;
+
+        if (password !== confirmpassword) {
+            return sendError(res, errorMessages.notSamePassword.statusCode, errorMessages.notSamePassword.message);
+        } else if (password === confirmpassword && password != null) {
+
+            //criação de nova senha
+            const salt = await bcrypt.genSalt(12);
+            const passwordHash = await bcrypt.hash(password, salt);
+            user.password = passwordHash;
+
+            console.log(user);
+        }
+
+        try {
+            //retorna os dados atualizados
+            await User.findOneAndUpdate({
+                _id: user._id
+            }, {
+                $set: user
+            }, {
+                new: true
+            }, )
+            res.status(200).json({
+                message: "Usuário atualizado com sucesso!"
+            })
+        } catch (error) {
+            res.status(500).json({
+                err
+            });
+        }
     }
 };

@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const bcryptSecret = process.env.BCRYPT_SECRET;
 
 // Função responsável por criar um token JWT para o usuário.
 createUserToken = async (user, req, res) => {
@@ -6,7 +7,7 @@ createUserToken = async (user, req, res) => {
     const token = jwt.sign({
         name: user.name,
         id: user._id
-    }, "ChupaC@br@10!");
+    }, bcryptSecret);
 
     // Retorna uma resposta de status 200 com o token e o ID do usuário.
     res.status(200).json({
