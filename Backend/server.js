@@ -12,7 +12,7 @@ const io = new Server(server);
 // Configuração do CORS.
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:3000'
+    origin: 'http://localhost:3200'
 }));
 
 // Configuração para o retorno de JSON.
