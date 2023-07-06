@@ -4,9 +4,13 @@ const Task = require('../Models/Task');
 // Helpers
 const getToken = require('../Helpers/get-token');
 const getUserByToken = require('../Helpers/get-user-by-token');
+const sendError = require('../Helpers/errorHelper');
 const ObjectId = require('mongoose').Types.ObjectId;
 
-module.exports = class PetController {
+// Utils
+const errorMessages = require('../Utils/errorMessages');
+
+module.exports = class taskController {
   static async createTask(req, res) {
     const { title, description } = req.body;
 
