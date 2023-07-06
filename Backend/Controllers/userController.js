@@ -3,6 +3,9 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const validator = require('email-validator');
 
+// SECRET
+const bcryptSecret = process.env.BCRYPT_SECRET;
+
 // Importação de modelos.
 const User = require('../Models/User');
 
@@ -100,9 +103,11 @@ module.exports = class userController {
       await createUserToken(newUser, req, res);
     } catch (error) {
       console.log(error);
-      res.status(500).json({
-        message: error.message,
-      });
+      return sendError(
+        res,
+        errorMessages.notCreateUser.statusCode,
+        errorMessages.notCreateUser.message
+      );
     }
   }
 
@@ -170,7 +175,7 @@ module.exports = class userController {
 
     if (req.headers.authorization) {
       const token = getToken(req);
-      const decoded = jwt.verify(token, 'ChupaC@br@10!');
+      const decoded = jwt.verify(token, bcryptSecret);
       currentUser = await User.findById(decoded.id);
       currentUser.password = undefined;
     } else {
@@ -205,8 +210,6 @@ module.exports = class userController {
     const user = await getUserByToken(token);
 
     const { name, email, password, confirmpassword } = req.body;
-
-    let image = '';
 
     // Validações
     const eValid = validator.validate(email);
@@ -258,8 +261,11 @@ module.exports = class userController {
       );
     } else if (password === confirmpassword && password != null) {
       //criação de nova senha
-      const salt = await bcrypt.genSalt(12);
-      const passwordHash = await bcrypt.hash(password, salt);
+      const [salt, passwordHash] = await Promise.all([
+        bcrypt.genSalt(12),
+        bcrypt.hash(password, salt),
+      ]);
+      
       user.password = passwordHash;
 
       console.log(user);
@@ -282,9 +288,11 @@ module.exports = class userController {
         message: 'Usuário atualizado com sucesso!',
       });
     } catch (error) {
-      res.status(500).json({
-        err,
-      });
+      return sendError(
+        res,
+        errorMessages.notUpdateUser.statusCode,
+        errorMessages.notUpdateUser.message
+        );
     }
   }
 };
