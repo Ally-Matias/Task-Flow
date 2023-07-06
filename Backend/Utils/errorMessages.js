@@ -47,6 +47,14 @@ const errorMessages = {
     statusCode: 400,
     message: 'Token inválido!',
   },
+  notCreateUser: {
+    statusCode: 500,
+    message: 'Não foi possivel criar o usuário!',
+  },
+  notUpdateUser: {
+    statusCode: 500,
+    message: 'Não foi possivel criar o usuário!',
+  },
 };
 
 module.exports = errorMessages;
