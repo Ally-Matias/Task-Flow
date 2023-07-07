@@ -10,9 +10,8 @@ export const Sidebar = styled.div`
   flex-direction: column;
 
   min-width: 13%;
-  max-width: auto;
+  max-width: 13%;
   min-height: 100%;
-  height: auto;
 
   padding: 0 20px;
 
@@ -98,7 +97,7 @@ export const Title = styled.p`
 `;
 
 export const TasksContainer = styled.div`
-  height: 100%;
+  height: 100vh;
 
   margin-top: 20px;
   margin-left: 60px;

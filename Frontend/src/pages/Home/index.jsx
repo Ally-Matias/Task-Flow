@@ -95,6 +95,7 @@ export function Home() {
             <TaskCard />
             <TaskCard />
             <TaskCard />
+            {/* <TaskCard />
             <TaskCard />
             <TaskCard />
             <TaskCard />
@@ -104,8 +105,7 @@ export function Home() {
             <TaskCard />
             <TaskCard />
             <TaskCard />
-            <TaskCard />
-            <TaskCard />
+            <TaskCard /> */}
           </TaskList>
         </TasksContainer>
       </Main>
