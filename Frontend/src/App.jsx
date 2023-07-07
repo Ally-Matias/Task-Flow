@@ -1,15 +1,12 @@
 import { GlobalStyle } from './styles/global'
 
-import { Home } from './pages/Home'
+import { SignIn } from './pages/SignIn'
 
-function App() {
+export function App() {
   return (
     <>
       <GlobalStyle />
-
-      <Home />
+      <SignIn />
     </>
   )
 }
-
-export default App
