@@ -23,5 +23,5 @@ export const TaskDescription = styled.p`
   margin-top: 16px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: wrap;
+  white-space: nowrap;
 `;
