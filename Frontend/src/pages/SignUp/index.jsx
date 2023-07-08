@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react';
-// import Input from '../../components/Form/Input'
+import Input from '../../components/Form/Input'
+
+import { Context } from '../../context/UserContext';
 
 import {
   Container,
   FormContainer,
   SignInContainer,
   SignUpContainer,
-  Input,
   Button,
 } from './styles'
 
@@ -16,6 +17,21 @@ function SignUp() {
   // function handleNewTask() {
   //   console.log('new task')
   // }
+
+  const [user, setUser] = useState({})
+  const {SignUp} = useContext(Context)
+
+  function handleChange(e){
+    setUser({ ...user, [e.target.name]: e.target.value })
+  }
+
+  function handleSubmit(e){
+    e.preventDefault()
+    // enviar o usuario para o banco
+    console.log(user)
+    SignUp(user)
+  } 
+
 
   const [buttonClicked, setButtonClicked] = useState(false);
 
@@ -41,45 +57,66 @@ function SignUp() {
 
         </SignInContainer>
 
-        <SignUpContainer>
+        <SignUpContainer onSubmit={handleSubmit}>
           <h1>Criar Conta</h1>
           <span>ou use seu e-mail para se registrar</span>
 
-          <Input type="text" placeholder="Nome" />
+          {/* <Input type="text" placeholder="Nome" />
           <Input type="text" placeholder="Sobrenome" />
           <Input type="email" placeholder="E-mail" />
           <Input type="password" placeholder="Senha" /> 
           
           
-                    {/* nova versão                   
+                    nova versão                    */}
 
-          function handleChange(e){}
-          <section>         
+          
+            
             <form>
               <Input
                 text="Nome"
                 type="text"
                 name="name"
                 placeholder="Digite o seu nome"
-                handleOnChnge={handleChange}
-              
+                handleOnChange={handleChange}
               />
+
+              <Input
+                text="E-mail"
+                type="email"
+                name="email"
+                placeholder="Digite o seu e-mail"
+                handleOnChange={handleChange}
+              />
+
+              <Input
+                text="Senha"
+                type="password"
+                name="password"
+                placeholder="Digite o sua senha"
+                handleOnChange={handleChange}
+              />
+
+              <Input
+                text="Confirmacao de Senha"
+                type="password"
+                name="confirmpassword"
+                placeholder="Confirme a sua senha"
+                handleOnChange={handleChange}
+              />
+
+              <Button
+                type="submit"
+                style={{
+                  border: '1px solid #01072d',
+                  backgroundColor: '#01072d',
+                  color: '#ffffff',
+                }}
+              >
+                Inscrever-se
+              </Button>
             </form>
-          </section> 
- */}
 
-
-
-          <Button
-            type="submit"
-            style={{
-              border: '1px solid #01072d',
-              backgroundColor: '#01072d',
-              color: '#ffffff',
-            }}
-          >
-            Inscrever-se
-          </Button>
+          
         </SignUpContainer>
       </FormContainer>
     </Container>

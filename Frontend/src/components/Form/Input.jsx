@@ -1,4 +1,4 @@
-import styles from './Input.module.css';
+import InputForm from './styles.js';
 
 function Input({
     type,
@@ -7,12 +7,11 @@ function Input({
     placeholder,
     handleOnChange,
     value,
-    multiple
+    multiple,
 }) {
     return (
         <div>
-            <label htmlFor={name}>{text}:</label>
-            <input
+            <InputForm
                 type={type}
                 name={name}
                 id={name}
@@ -25,4 +24,4 @@ function Input({
     );
 }
 
-export default Input;
+export default Input

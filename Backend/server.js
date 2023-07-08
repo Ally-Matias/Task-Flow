@@ -29,7 +29,7 @@ const app = express();
 app.use(helmet());
 
 // Configuração do CORS.
-app.use(cors({credentials: true, origin: 'https://localhost:3000'}));
+app.use(cors({credentials: true, origin: 'http://localhost:5173'}));
 
 // Configuração para o retorno de JSON.
 app.use(express.json());
