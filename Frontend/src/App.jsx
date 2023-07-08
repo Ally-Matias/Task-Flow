@@ -1,12 +1,27 @@
-import { GlobalStyle } from './styles/global'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
-import { SignIn } from './pages/SignIn'
+import GlobalStyle from './styles/global'
+import SignIn from './pages/SignIn'
+import Home from './pages/Home'
+import SignUp from './pages/SignUp'
 
-export function App() {
+function App() {
   return (
-    <>
+    <Router>
       <GlobalStyle />
-      <SignIn />
-    </>
-  )
+      <Switch>
+        <Route path="/SignIn">
+          <SignIn />
+        </Route>
+        <Route path="/SignUp">
+          <SignUp />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </Router>
+  );
 }
+
+export default App

@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useEffect } from 'react';
 
 import {
   Container,
@@ -9,7 +11,25 @@ import {
   Button,
 } from './styles'
 
-export function SignIn() {
+function SignIn() {
+
+  const [buttonClicked, setButtonClicked] = useState(false);
+
+  useEffect(() => {
+    if (buttonClicked) {
+      window.location.href = '/';
+    }
+  }, [buttonClicked]);
+
+  const [buttonClickedUp, setButtonClickedUp] = useState(false);
+
+  useEffect(() => {
+    if (buttonClickedUp) {
+      window.location.href = '/SignUp';
+    }
+  }, [buttonClickedUp]);
+
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -24,11 +44,11 @@ export function SignIn() {
           <h1>Entrar</h1>
           <span>ou crie sua conta</span>
 
-          <Input placeholder="E-mail" value={email} />
+          <Input type="email" placeholder="E-mail" />
 
-          <Input placeholder="Senha" value={password} />
+          <Input type="password" placeholder="Senha"/>
 
-          <Button type="submit">Entrar</Button>
+          <Link to="/"><Button type="submit" onClick={() => setButtonClicked(true)}>Entrar</Button></Link>
         </SignInContainer>
         <SignUpContainer>
           <h1>Olá, Devs!</h1>
@@ -36,16 +56,18 @@ export function SignIn() {
             Coloque os seus dados pessoais e comece a criar suas tasks
           </span>
 
-          <Button
+          <Link to="/SignUp"><Button
             type="submit"
             style={{
               border: '1px solid #fff',
             }}
-          >
+            onClick={() => setButtonClickedUp(true)}>
             Inscrever-se
-          </Button>
+          </Button></Link>
         </SignUpContainer>
       </FormContainer>
     </Container>
   )
 }
+
+export default SignIn

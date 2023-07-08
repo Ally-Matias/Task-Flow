@@ -44,7 +44,7 @@ export const ButtonEdit = styled.button`
 
 export const ButtonDefault = styled.button`
   min-width: 130px;
-  height: 40px;
+  height: auto;
   color: #fff;
   padding: 5px 10px;
   font-weight: bold;

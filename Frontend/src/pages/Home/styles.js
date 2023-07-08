@@ -10,8 +10,9 @@ export const Sidebar = styled.div`
   flex-direction: column;
 
   min-width: 13%;
-  max-width: 13%;
+  max-width: auto;
   min-height: 100%;
+  height: auto;
 
   padding: 0 20px;
 
@@ -85,6 +86,29 @@ export const ButtonSearch = styled.button`
   }
 `;
 
+export const ButtonLogin = styled.button`
+  width: 80px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 20px;
+  margin-top: 20px;
+  justify-content: center;
+  border: 1px solid #1e1e1e;
+  background: #191919;
+  text-align: center;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 17px;
+
+  &:active {
+    background: #323232;
+  }
+`;
+
 export const Title = styled.p`
   display: inline-block;
   color: #ffffff;
@@ -97,7 +121,7 @@ export const Title = styled.p`
 `;
 
 export const TasksContainer = styled.div`
-  height: 100vh;
+  height: auto;
 
   margin-top: 20px;
   margin-left: 60px;
