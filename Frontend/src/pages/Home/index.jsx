@@ -1,7 +1,7 @@
-import { api } from '../../services/api';
-
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
+import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 import {
   Container,
@@ -12,13 +12,23 @@ import {
   Main,
   Header,
   ButtonSearch,
+  ButtonLogin,
   Title,
   TasksContainer,
   TaskList,
 } from './styles';
 import { TaskCard } from '../../components/TaskCard';
 
-export function Home() {
+function Home() {
+  
+  const [buttonClicked, setButtonClicked] = useState(false);
+
+  useEffect(() => {
+    if (buttonClicked) {
+      window.location.href = '/SignIn';
+    }
+  }, [buttonClicked]);
+
   async function handleCreateNewTask() {
     try {
       const { data } = await api.get('/tasks');
@@ -35,7 +45,7 @@ export function Home() {
         <LogoContainer>
           <a href="">
             <img
-              src="../../../public/logoPrincipal.png"
+              src="src/assets/img/favicon.ico"
               height="60"
               width="60"
             />
@@ -62,6 +72,11 @@ export function Home() {
       </Sidebar>
 
       <Main>
+        
+        <Link to="/SignIn">
+          <ButtonLogin onClick={() => setButtonClicked(true)}>Login</ButtonLogin>
+        </Link>
+
         <Header>
           <div
             style={{
@@ -72,7 +87,7 @@ export function Home() {
             <ButtonSearch>
               <a href="">
                 <img
-                  src="../../../public/searchIcon.png"
+                  src="src/assets/img/search.png"
                   height="19"
                   width="19"
                 />
@@ -112,3 +127,6 @@ export function Home() {
     </Container>
   );
 }
+
+
+export default Home

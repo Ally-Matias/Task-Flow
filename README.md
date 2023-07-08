@@ -1,5 +1,5 @@
 <div style="text-align: center">
-  <h1 align="center"><img src="Frontend/assets/img/logoReadme.png" alt="logo" width="33" height="33">TaskFlow</h1>
+  <h1 align="center"><img src="Frontend/src/assets/img/logoReadme.png" alt="logo" width="33" height="33"> TaskFlow</h1>
   <p align="center">
     <img
       src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge" />
