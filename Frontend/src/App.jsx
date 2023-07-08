@@ -5,21 +5,28 @@ import SignIn from './pages/SignIn'
 import Home from './pages/Home'
 import SignUp from './pages/SignUp'
 
+
+// context
+
+import { UserProvider } from "./context/UserContext"
+
 function App() {
   return (
     <Router>
-      <GlobalStyle />
-      <Switch>
-        <Route path="/SignIn">
-          <SignIn />
-        </Route>
-        <Route path="/SignUp">
-          <SignUp />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
+      <UserProvider>
+        <GlobalStyle />
+        <Switch>
+          <Route path="/SignIn">
+            <SignIn />
+          </Route>
+          <Route path="/SignUp"> 
+            <SignUp />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </UserProvider>
     </Router>
   );
 }
