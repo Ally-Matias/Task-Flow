@@ -1,54 +1,71 @@
-import React, { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useEffect } from 'react';
+import Input from '../../components/Form/Input'
+import { Context } from '../../context/UserContext'
 
 import {
   Container,
   FormContainer,
   SignInContainer,
   SignUpContainer,
-  Input,
   Button,
 } from './styles'
 
 function SignIn() {
+  const [user, setUser] = useState({})
+  const { login } = useContext(Context)
 
-  const [buttonClicked, setButtonClicked] = useState(false);
+  function handleChange(e) {
+    setUser({ ...user, [e.target.name]: e.target.value })
+  }
 
-  useEffect(() => {
-    if (buttonClicked) {
-      window.location.href = '/';
-    }
-  }, [buttonClicked]);
+  function handleSubmit(e) {
+    e.preventDefault()
+    
+    login(user)
+  }
 
-  const [buttonClickedUp, setButtonClickedUp] = useState(false);
+  const [buttonClickedUp, setButtonClickedUp] = useState(false)
 
   useEffect(() => {
     if (buttonClickedUp) {
-      window.location.href = '/SignUp';
+      window.location.href = '/SignUp'
     }
-  }, [buttonClickedUp]);
-
-
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-  function handleNewTask() {
-    console.log('new task')
-  }
+  }, [buttonClickedUp])
 
   return (
     <Container>
       <FormContainer>
-        <SignInContainer onSubmit={handleNewTask}>
+        <SignInContainer>
           <h1>Entrar</h1>
           <span>ou crie sua conta</span>
 
-          <Input type="email" placeholder="E-mail" />
+          <form onSubmit={handleSubmit}>
+            <Input
+              text="E-mail"
+              type="email"
+              name="email"
+              placeholder="Digite o seu e-mail"
+              handleOnChange={handleChange}
+            />
 
-          <Input type="password" placeholder="Senha"/>
+            <Input
+              text="Senha"
+              type="password"
+              name="password"
+              placeholder="Digite o sua senha"
+              handleOnChange={handleChange}
+            />
 
-          <Link to="/"><Button type="submit" onClick={() => setButtonClicked(true)}>Entrar</Button></Link>
+            <Button
+              type="submit"
+              style={{
+                marginLeft: '50px',
+              }}
+            >
+              Entrar
+            </Button>
+          </form>
         </SignInContainer>
         <SignUpContainer>
           <h1>Olá, Devs!</h1>
@@ -56,14 +73,17 @@ function SignIn() {
             Coloque os seus dados pessoais e comece a criar suas tasks
           </span>
 
-          <Link to="/SignUp"><Button
-            type="submit"
-            style={{
-              border: '1px solid #fff',
-            }}
-            onClick={() => setButtonClickedUp(true)}>
-            Inscrever-se
-          </Button></Link>
+          <Link to="/SignUp">
+            <Button
+              type="submit"
+              style={{
+                border: '1px solid #fff',
+              }}
+              onClick={() => setButtonClickedUp(true)}
+            >
+              Inscrever-se
+            </Button>
+          </Link>
         </SignUpContainer>
       </FormContainer>
     </Container>
