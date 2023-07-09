@@ -1,7 +1,9 @@
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+
+import { Context } from '../../context/UserContext';
 
 import {
   Container,
@@ -20,6 +22,9 @@ import {
 import { TaskCard } from '../../components/TaskCard';
 
 function Home() {
+
+  const {authenticated, logout} = useContext(Context)
+
   
   const [buttonClicked, setButtonClicked] = useState(false);
 
@@ -73,9 +78,36 @@ function Home() {
 
       <Main>
         
-        <Link to="/SignIn">
-          <ButtonLogin onClick={() => setButtonClicked(true)}>Login</ButtonLogin>
-        </Link>
+          {authenticated ? (
+          <>
+            <button style={{
+
+              Width: '30px',
+              height: '30px',
+              color: '#fff',
+              padding: '5px 10px',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              display: 'flex',
+              marginLeft: 'auto',
+              marginTop: '20px',
+              marginRight: '35px',
+              borderRadius: '5px',
+              border: '2px solid #d90429',
+              background: '#d90429',
+
+
+
+            }} onClick={logout}>Sair</button>
+          </>
+          ) : (
+            <Link to="/SignIn">
+              <ButtonLogin onClick={() => setButtonClicked(true)}>Login</ButtonLogin>
+            </Link>
+          )
+          }
+
+        
 
         <Header>
           <div
