@@ -1,9 +1,9 @@
-import { Button } from '../Button'
-import { Container, TaskTitle, TaskDescription } from './styles'
+import { Button } from '../Button';
+import { Container, TaskTitle, TaskDescription } from './styles';
 
-export function TaskCard({ title, description, ...rest }) {
+export function TaskCard() {
   return (
-    <Container {...rest}>
+    <Container>
       <div
         style={{
           display: 'flex',
@@ -11,12 +11,20 @@ export function TaskCard({ title, description, ...rest }) {
           marginBottom: '10px',
         }}
       >
-        <Button type="remove" onClick={() => console.log('Task removida')} />
+        <Button type="remove" />
         <Button type="edit" />
       </div>
 
-      <TaskTitle>{title}</TaskTitle>
-      <TaskDescription>{description}</TaskDescription>
+      <TaskTitle>Titulo da Tarefa</TaskTitle>
+      <TaskDescription>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam quo
+        aliquam numquam ad odit ab debitis fugit architecto commodi beatae rem
+        non consequuntur odio officiis modi, delectus corporis laborum omnis?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio
+        pariatur facere unde magni officiis numquam officia velit vitae fugiat,
+        eius quos, minima recusandae cum quaerat non. Quis tempora deserunt
+        accusantium?
+      </TaskDescription>
     </Container>
-  )
+  );
 }

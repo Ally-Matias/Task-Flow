@@ -1,10 +1,9 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  min-height: 100vh;
-  height: auto;
-`
+  flex: 1;
+`;
 
 export const Sidebar = styled.div`
   display: flex;
@@ -18,7 +17,7 @@ export const Sidebar = styled.div`
   padding: 0 20px;
 
   background-color: #1e1e1e;
-`
+`;
 
 export const LogoContainer = styled.div`
   display: flex;
@@ -28,14 +27,14 @@ export const LogoContainer = styled.div`
   height: 35vh;
 
   margin-top: 24px;
-`
+`;
 
 export const TaskInput = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
-`
+`;
 
 export const TextArea = styled.textarea`
   max-width: 100%;
@@ -54,18 +53,18 @@ export const TextArea = styled.textarea`
   outline: none;
 
   border-color: rgb(48, 52, 54);
-`
+`;
 
 export const Main = styled.main`
   width: 100%;
-`
+`;
 
 export const Header = styled.header`
   display: flex;
   justify-content: center;
 
   margin-top: 10px;
-`
+`;
 
 export const ButtonSearch = styled.button`
   width: 50px;
@@ -85,7 +84,7 @@ export const ButtonSearch = styled.button`
   &:active {
     background: #323232;
   }
-`
+`;
 
 export const ButtonLogin = styled.button`
   width: 80px;
@@ -108,7 +107,7 @@ export const ButtonLogin = styled.button`
   &:active {
     background: #323232;
   }
-`
+`;
 
 export const Title = styled.p`
   display: inline-block;
@@ -119,14 +118,14 @@ export const Title = styled.p`
   border-bottom-width: 0.325rem;
   border-bottom-style: solid;
   border-bottom-color: #ffffff;
-`
+`;
 
 export const TasksContainer = styled.div`
   height: auto;
 
   margin-top: 20px;
   margin-left: 60px;
-`
+`;
 
 export const TaskList = styled.div`
   width: auto;
@@ -134,4 +133,4 @@ export const TaskList = styled.div`
   flex: 3;
   justify-content: center;
   flex-wrap: wrap;
-`
+`;

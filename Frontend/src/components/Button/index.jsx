@@ -1,12 +1,12 @@
-import { ButtonDefault, ButtonRemove, ButtonEdit } from './styles'
+import { ButtonDefault, ButtonRemove, ButtonEdit } from './styles';
 
-export function Button({ title, type = 'default', ...rest }) {
+export function Button({ title, type = 'default' }) {
   if (type === 'edit') {
-    return <ButtonEdit {...rest}>Editar</ButtonEdit>
+    return <ButtonEdit>Editar</ButtonEdit>;
   }
 
   if (type === 'remove') {
-    return <ButtonRemove {...rest}>X</ButtonRemove>
+    return <ButtonRemove>X</ButtonRemove>;
   }
-  return <ButtonDefault {...rest}>{title}</ButtonDefault>
+  return <ButtonDefault>{title}</ButtonDefault>;
 }

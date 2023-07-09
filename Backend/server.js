@@ -11,8 +11,8 @@ const { Server } = require('socket.io');
 // Import do certificado e key SSL/TLS.
 const loadCertificado = async () => {
   try {
-    const cert = await fs.readFileSync(path.join(__dirname, 'Certificate', 'taskflow.cert'));
-    const key = await fs.readFileSync(path.join(__dirname, 'Certificate', 'taskflow.key'));
+    const cert = await fs.readFileSync(path.join(__dirname, 'Certificate', 'backend.crt'));
+    const key = await fs.readFileSync(path.join(__dirname, 'Certificate', 'backend.key'));
     return {
       cert,
       key
@@ -29,7 +29,7 @@ const app = express();
 app.use(helmet());
 
 // Configuração do CORS.
-app.use(cors({credentials: true, origin: 'http://localhost:5173'}));
+app.use(cors({credentials: true, origin: 'https://localhost:5173'}));
 
 // Configuração para o retorno de JSON.
 app.use(express.json());
@@ -47,7 +47,7 @@ app.use('/users', userRoutes);
 // Middleware para as rotas relacionadas as Tasks.
 app.use('/tasks', tasksRoutes);
 
-//
+
 const initServer = async () => {
   try {
     const {
