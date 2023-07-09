@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useEffect } from 'react';
 
 import {
   Container,
@@ -12,23 +11,21 @@ import {
 } from './styles'
 
 function SignIn() {
-
-  const [buttonClicked, setButtonClicked] = useState(false);
+  const [buttonClicked, setButtonClicked] = useState(false)
 
   useEffect(() => {
     if (buttonClicked) {
-      window.location.href = '/';
+      window.location.href = '/'
     }
-  }, [buttonClicked]);
+  }, [buttonClicked])
 
-  const [buttonClickedUp, setButtonClickedUp] = useState(false);
+  const [buttonClickedUp, setButtonClickedUp] = useState(false)
 
   useEffect(() => {
     if (buttonClickedUp) {
-      window.location.href = '/SignUp';
+      window.location.href = '/SignUp'
     }
-  }, [buttonClickedUp]);
-
+  }, [buttonClickedUp])
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -46,9 +43,13 @@ function SignIn() {
 
           <Input type="email" placeholder="E-mail" />
 
-          <Input type="password" placeholder="Senha"/>
+          <Input type="password" placeholder="Senha" />
 
-          <Link to="/"><Button type="submit" onClick={() => setButtonClicked(true)}>Entrar</Button></Link>
+          <Link to="/">
+            <Button type="submit" onClick={() => setButtonClicked(true)}>
+              Entrar
+            </Button>
+          </Link>
         </SignInContainer>
         <SignUpContainer>
           <h1>Olá, Devs!</h1>
@@ -56,14 +57,17 @@ function SignIn() {
             Coloque os seus dados pessoais e comece a criar suas tasks
           </span>
 
-          <Link to="/SignUp"><Button
-            type="submit"
-            style={{
-              border: '1px solid #fff',
-            }}
-            onClick={() => setButtonClickedUp(true)}>
-            Inscrever-se
-          </Button></Link>
+          <Link to="/SignUp">
+            <Button
+              type="submit"
+              style={{
+                border: '1px solid #fff',
+              }}
+              onClick={() => setButtonClickedUp(true)}
+            >
+              Inscrever-se
+            </Button>
+          </Link>
         </SignUpContainer>
       </FormContainer>
     </Container>
