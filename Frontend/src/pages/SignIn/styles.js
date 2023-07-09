@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Container = styled.body`
+export const Container = styled.div`
   display: flex;
   background-color: #fff;
   justify-content: center;
@@ -22,7 +22,7 @@ export const FormContainer = styled.div`
   min-height: 480px;
 `
 
-export const SignInContainer = styled.form`
+export const SignInContainer = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
