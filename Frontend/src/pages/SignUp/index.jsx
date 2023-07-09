@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import Input from '../../components/Form/Input'
-
 import { Context } from '../../context/UserContext';
 
 import {
@@ -60,16 +59,6 @@ function SignUp() {
         <SignUpContainer onSubmit={handleSubmit}>
           <h1>Criar Conta</h1>
           <span>ou use seu e-mail para se registrar</span>
-
-          {/* <Input type="text" placeholder="Nome" />
-          <Input type="text" placeholder="Sobrenome" />
-          <Input type="email" placeholder="E-mail" />
-          <Input type="password" placeholder="Senha" /> 
-          
-          
-                    nova versão                    */}
-
-          
             
             <form>
               <Input
@@ -112,7 +101,7 @@ function SignUp() {
                   color: '#ffffff',
                 }}
               >
-                Inscrever-se
+                Inscrever-se 
               </Button>
             </form>
 

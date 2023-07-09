@@ -1,25 +1,31 @@
-import React, { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react';
+import Input from '../../components/Form/Input'
+import { Context } from '../../context/UserContext';
 
 import {
   Container,
   FormContainer,
   SignInContainer,
   SignUpContainer,
-  Input,
   Button,
 } from './styles'
 
 function SignIn() {
 
-  const [buttonClicked, setButtonClicked] = useState(false);
+  const [user, setUser] = useState({})
+  const { login } = useContext(Context)
 
-  useEffect(() => {
-    if (buttonClicked) {
-      window.location.href = '/';
-    }
-  }, [buttonClicked]);
+  function handleChange(e){
+    setUser({ ...user, [e.target.name]: e.target.value })
+  }
+
+  function handleSubmit(e){
+    e.preventDefault()
+    console.log(user)
+    login(user)
+  }
 
   const [buttonClickedUp, setButtonClickedUp] = useState(false);
 
@@ -29,26 +35,40 @@ function SignIn() {
     }
   }, [buttonClickedUp]);
 
-
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-  function handleNewTask() {
-    console.log('new task')
-  }
-
   return (
     <Container>
       <FormContainer>
-        <SignInContainer onSubmit={handleNewTask}>
+        <SignInContainer>
           <h1>Entrar</h1>
           <span>ou crie sua conta</span>
 
-          <Input type="email" placeholder="E-mail" />
+          <form onSubmit={handleSubmit}>  
 
-          <Input type="password" placeholder="Senha"/>
+              <Input
+                text="E-mail"
+                type="email"
+                name="email"
+                placeholder="Digite o seu e-mail"
+                handleOnChange={handleChange}
+              />
 
-          <Link to="/"><Button type="submit" onClick={() => setButtonClicked(true)}>Entrar</Button></Link>
+              <Input
+                text="Senha"
+                type="password"
+                name="password"
+                placeholder="Digite o sua senha"
+                handleOnChange={handleChange}
+              />
+
+              <Button 
+              type="submit" 
+              style={{
+                marginLeft: '50px'
+              }}
+              >Entrar</Button>
+
+            </form>
+
         </SignInContainer>
         <SignUpContainer>
           <h1>Olá, Devs!</h1>
