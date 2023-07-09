@@ -21,7 +21,7 @@ function SignIn() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    console.log(user)
+    
     login(user)
   }
 
