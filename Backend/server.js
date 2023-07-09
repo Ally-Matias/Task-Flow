@@ -29,7 +29,7 @@ const app = express();
 app.use(helmet());
 
 // Configuração do CORS.
-app.use(cors({credentials: true, origin: 'https://localhost:3000'}));
+app.use(cors({credentials: true, origin: 'https://localhost:5173'}));
 
 // Configuração para o retorno de JSON.
 app.use(express.json());
@@ -47,7 +47,7 @@ app.use('/users', userRoutes);
 // Middleware para as rotas relacionadas as Tasks.
 app.use('/tasks', tasksRoutes);
 
-
+//
 const initServer = async () => {
   try {
     const {
