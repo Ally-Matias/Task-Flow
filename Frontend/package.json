@@ -11,10 +11,7 @@
   },
   "dependencies": {
     "axios": "^1.4.0",
-<<<<<<< HEAD
     "mitt": "^3.0.1",
-=======
->>>>>>> feat/recuperar_tasks
     "react": "^18.2.0",
     "react-router-dom": "^5.2.0",
     "styled-components": "^6.0.2"

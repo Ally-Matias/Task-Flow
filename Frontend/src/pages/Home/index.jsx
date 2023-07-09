@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react'
 
-import { Input } from '../../components/Input';
-import { Button } from '../../components/Button';
-import { TaskCard } from '../../components/TaskCard';
-import { Link } from 'react-router-dom';
+import { Input } from '../../components/Input'
+import { Button } from '../../components/Button'
+import { TaskCard } from '../../components/TaskCard'
+import { Link } from 'react-router-dom'
 
 import api from '../../utils/api'
 
-import { Context } from '../../context/UserContext';
+import { Context } from '../../context/UserContext'
 
 import {
   Container,
@@ -25,8 +25,7 @@ import {
 } from './styles'
 
 function Home() {
-
-  const {authenticated, logout} = useContext(Context)
+  const { authenticated, logout } = useContext(Context)
 
   const [tasks, setTasks] = useState([])
   const [token] = useState(localStorage.getItem('token'))
@@ -86,35 +85,36 @@ function Home() {
       </Sidebar>
 
       <Main>
-        
-      {authenticated ? (
+        {authenticated ? (
           <>
-            <button style={{
-
-              Width: '30px',
-              height: '30px',
-              color: '#fff',
-              padding: '5px 10px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              display: 'flex',
-              marginLeft: 'auto',
-              marginTop: '20px',
-              marginRight: '35px',
-              borderRadius: '5px',
-              border: '2px solid #d90429',
-              background: '#d90429',
-
-
-
-            }} onClick={logout}>Sair</button>
+            <button
+              style={{
+                Width: '30px',
+                height: '30px',
+                color: '#fff',
+                padding: '5px 10px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                display: 'flex',
+                marginLeft: 'auto',
+                marginTop: '20px',
+                marginRight: '35px',
+                borderRadius: '5px',
+                border: '2px solid #d90429',
+                background: '#d90429',
+              }}
+              onClick={logout}
+            >
+              Sair
+            </button>
           </>
-          ) : (
-            <Link to="/SignIn">
-              <ButtonLogin onClick={() => setButtonClicked(true)}>Login</ButtonLogin>
-            </Link>
-          )
-          }
+        ) : (
+          <Link to="/SignIn">
+            <ButtonLogin onClick={() => setButtonClicked(true)}>
+              Login
+            </ButtonLogin>
+          </Link>
+        )}
 
         <Header>
           <div
