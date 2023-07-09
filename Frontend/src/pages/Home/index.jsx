@@ -1,7 +1,11 @@
+import React, { useEffect, useState, useContext } from 'react'
+
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
+import { TaskCard } from '../../components/TaskCard';
 import { Link } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
+
+import api from '../../utils/api'
 
 import { Context } from '../../context/UserContext';
 
@@ -18,31 +22,39 @@ import {
   Title,
   TasksContainer,
   TaskList,
-} from './styles';
-import { TaskCard } from '../../components/TaskCard';
+} from './styles'
 
 function Home() {
 
   const {authenticated, logout} = useContext(Context)
 
-  
-  const [buttonClicked, setButtonClicked] = useState(false);
+  const [tasks, setTasks] = useState([])
+  const [token] = useState(localStorage.getItem('token'))
+  const [buttonClicked, setButtonClicked] = useState(false)
+
+  async function getMyTasks() {
+    try {
+      const { data } = await api.get('/tasks/mytasks', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      setTasks(data.tasks)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
     if (buttonClicked) {
-      window.location.href = '/SignIn';
+      window.location.href = '/SignIn'
     }
-  }, [buttonClicked]);
+  }, [buttonClicked])
 
-  async function handleCreateNewTask() {
-    try {
-      const { data } = await api.get('/tasks');
-
-      console.log('RETORNO DA API => ', data);
-    } catch (error) {
-      console.log('ERRO NA API => ', error);
-    }
-  }
+  useEffect(() => {
+    getMyTasks()
+  })
 
   return (
     <Container>
@@ -50,6 +62,7 @@ function Home() {
         <LogoContainer>
           <a href="">
             <img
+              alt="icone do projeto"
               src="src/assets/img/favicon.ico"
               height="60"
               width="60"
@@ -68,17 +81,13 @@ function Home() {
         <TaskInput>
           <Input placeholder="Título da Tarefa" />
           <TextArea placeholder="Descrição da tarefa" />
-          <Button
-            type="submit"
-            title="Cadastrar Nova Tarefa"
-            onClick={handleCreateNewTask()}
-          />
+          <Button type="submit" title="Cadastrar Nova Tarefa" />
         </TaskInput>
       </Sidebar>
 
       <Main>
         
-          {authenticated ? (
+      {authenticated ? (
           <>
             <button style={{
 
@@ -107,8 +116,6 @@ function Home() {
           )
           }
 
-        
-
         <Header>
           <div
             style={{
@@ -119,6 +126,7 @@ function Home() {
             <ButtonSearch>
               <a href="">
                 <img
+                  alt="icone de search"
                   src="src/assets/img/search.png"
                   height="19"
                   width="19"
@@ -133,32 +141,18 @@ function Home() {
             <Title>Tarefas</Title>
           </div>
           <TaskList>
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            {/* <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard /> */}
+            {tasks.map((task) => (
+              <TaskCard
+                key={task._id}
+                title={task.title}
+                description={task.description}
+              />
+            ))}
           </TaskList>
         </TasksContainer>
       </Main>
     </Container>
-  );
+  )
 }
-
 
 export default Home

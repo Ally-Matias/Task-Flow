@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import GlobalStyle from './styles/global'
 import SignIn from './pages/SignIn'
@@ -28,7 +28,7 @@ function App() {
         </Switch>
       </UserProvider>
     </Router>
-  );
+  )
 }
 
 export default App
