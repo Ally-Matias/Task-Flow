@@ -11,7 +11,7 @@ export const Sidebar = styled.div`
 
   min-width: 13%;
   max-width: auto;
-  min-height: 100%;
+  min-height: 100vh;
   height: auto;
 
   padding: 0 20px;
