@@ -1,9 +1,13 @@
-import { Input } from '../../components/Input';
-import { Button } from '../../components/Button';
-import { Link } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react'
 
-import { Context } from '../../context/UserContext';
+import { Link } from 'react-router-dom'
+
+import { Input } from '../../components/Input'
+import { Button } from '../../components/Button'
+
+import api from '../../utils/api'
+
+import { Context } from '../../context/UserContext'
 
 import {
   Container,
@@ -18,31 +22,53 @@ import {
   Title,
   TasksContainer,
   TaskList,
-} from './styles';
-import { TaskCard } from '../../components/TaskCard';
+} from './styles'
+import { TaskCard } from '../../components/TaskCard'
 
 function Home() {
+  const { authenticated, logout } = useContext(Context)
 
-  const {authenticated, logout} = useContext(Context)
-
-  
-  const [buttonClicked, setButtonClicked] = useState(false);
+  const [buttonClicked, setButtonClicked] = useState(false)
+  const [tasks, setTasks] = useState([])
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
     if (buttonClicked) {
-      window.location.href = '/SignIn';
+      window.location.href = '/SignIn'
     }
-  }, [buttonClicked]);
+  }, [buttonClicked])
 
-  async function handleCreateNewTask() {
+  async function getMyTasks() {
     try {
-      const { data } = await api.get('/tasks');
+      const { data } = await api.get('/tasks/mytasks', {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+        },
+      })
 
-      console.log('RETORNO DA API => ', data);
+      setTasks(data.tasks)
     } catch (error) {
-      console.log('ERRO NA API => ', error);
+      console.log('ERRO NA API => ', error)
     }
   }
+
+  // async function createNewTask() {
+  //   try {
+  //     const { data } = await api.post('/tasks', {
+  //       title: 'Nova tarefa',
+  //       description: 'Descrição da nova tarefa',
+  //       when: new Date(),
+  //     })
+
+  //     setTasks([...tasks, data.task])
+  //   } catch (error) {
+  //     console.log('ERRO NA API => ', error)
+  //   }
+  // }
+
+  useEffect(() => {
+    getMyTasks()
+  })
 
   return (
     <Container>
@@ -50,6 +76,7 @@ function Home() {
         <LogoContainer>
           <a href="">
             <img
+              alt="Logo principal do projeto"
               src="src/assets/img/favicon.ico"
               height="60"
               width="60"
@@ -68,46 +95,41 @@ function Home() {
         <TaskInput>
           <Input placeholder="Título da Tarefa" />
           <TextArea placeholder="Descrição da tarefa" />
-          <Button
-            type="submit"
-            title="Cadastrar Nova Tarefa"
-            onClick={handleCreateNewTask()}
-          />
+          <Button type="submit" title="Cadastrar Nova Tarefa" />
         </TaskInput>
       </Sidebar>
 
       <Main>
-        
-          {authenticated ? (
+        {authenticated ? (
           <>
-            <button style={{
-
-              Width: '30px',
-              height: '30px',
-              color: '#fff',
-              padding: '5px 10px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-              display: 'flex',
-              marginLeft: 'auto',
-              marginTop: '20px',
-              marginRight: '35px',
-              borderRadius: '5px',
-              border: '2px solid #d90429',
-              background: '#d90429',
-
-
-
-            }} onClick={logout}>Sair</button>
+            <button
+              style={{
+                Width: '30px',
+                height: '30px',
+                color: '#fff',
+                padding: '5px 10px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                display: 'flex',
+                marginLeft: 'auto',
+                marginTop: '20px',
+                marginRight: '35px',
+                borderRadius: '5px',
+                border: '2px solid #d90429',
+                background: '#d90429',
+              }}
+              onClick={logout}
+            >
+              Sair
+            </button>
           </>
-          ) : (
-            <Link to="/SignIn">
-              <ButtonLogin onClick={() => setButtonClicked(true)}>Login</ButtonLogin>
-            </Link>
-          )
-          }
-
-        
+        ) : (
+          <Link to="/SignIn">
+            <ButtonLogin onClick={() => setButtonClicked(true)}>
+              Login
+            </ButtonLogin>
+          </Link>
+        )}
 
         <Header>
           <div
@@ -119,6 +141,7 @@ function Home() {
             <ButtonSearch>
               <a href="">
                 <img
+                  alt="Icone de uma lupa"
                   src="src/assets/img/search.png"
                   height="19"
                   width="19"
@@ -133,32 +156,24 @@ function Home() {
             <Title>Tarefas</Title>
           </div>
           <TaskList>
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            {/* <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
-            <TaskCard /> */}
+            {tasks.length === 0 ? (
+              <div
+                style={{
+                  marginTop: '10%',
+                }}
+              >
+                <h1 style={{ color: '#fff' }}>Nenhuma tarefa cadastrada</h1>
+              </div>
+            ) : (
+              tasks.map((task) => (
+                <TaskCard key={task.id} id={task.id} title={task.title} />
+              ))
+            )}
           </TaskList>
         </TasksContainer>
       </Main>
     </Container>
-  );
+  )
 }
-
 
 export default Home
