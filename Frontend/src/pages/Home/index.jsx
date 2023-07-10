@@ -23,6 +23,7 @@ import {
   TasksContainer,
   TaskList,
 } from './styles'
+
 import { TaskCard } from '../../components/TaskCard'
 
 function Home() {

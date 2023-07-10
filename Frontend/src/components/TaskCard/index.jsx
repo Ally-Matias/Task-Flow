@@ -12,7 +12,7 @@ export function TaskCard({ id, title, description }) {
   }
 
   return (
-    <Container>
+    <Container {...rest}>
       <div
         style={{
           display: 'flex',
@@ -20,6 +20,7 @@ export function TaskCard({ id, title, description }) {
           marginBottom: '10px',
         }}
       >
+        
         <Button type="remove" onClick={() => handleRemoveTask(id)} />
         <Button type="edit" />
       </div>
