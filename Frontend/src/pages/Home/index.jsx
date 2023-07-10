@@ -27,16 +27,26 @@ import { TaskCard } from '../../components/TaskCard'
 
 function Home() {
   const { authenticated, logout } = useContext(Context)
-
   const [buttonClicked, setButtonClicked] = useState(false)
   const [tasks, setTasks] = useState([])
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
   const token = localStorage.getItem('token')
 
-  useEffect(() => {
-    if (buttonClicked) {
-      window.location.href = '/SignIn'
-    }
-  }, [buttonClicked])
+  function handleTitleChange(event) {
+    setTitle(event.target.value)
+  }
+
+  // Função para lidar com a alteração da descrição
+  function handleDescriptionChange(event) {
+    setDescription(event.target.value)
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault()
+
+    createNewTask(title, description)
+  }
 
   async function getMyTasks() {
     try {
@@ -52,19 +62,25 @@ function Home() {
     }
   }
 
-  // async function createNewTask() {
-  //   try {
-  //     const { data } = await api.post('/tasks', {
-  //       title: 'Nova tarefa',
-  //       description: 'Descrição da nova tarefa',
-  //       when: new Date(),
-  //     })
+  async function createNewTask(title, description) {
+    try {
+      const { data } = await api.post('/tasks/create', {
+        title,
+        description,
+      })
 
-  //     setTasks([...tasks, data.task])
-  //   } catch (error) {
-  //     console.log('ERRO NA API => ', error)
-  //   }
-  // }
+      console.log('DATA => ', data)
+      // setTasks([...tasks, data.task])
+    } catch (error) {
+      console.log('ERRO NA API => ', error)
+    }
+  }
+
+  useEffect(() => {
+    if (buttonClicked) {
+      window.location.href = '/SignIn'
+    }
+  }, [buttonClicked])
 
   useEffect(() => {
     getMyTasks()
@@ -92,9 +108,17 @@ function Home() {
           </h2>
         </LogoContainer>
 
-        <TaskInput>
-          <Input placeholder="Título da Tarefa" />
-          <TextArea placeholder="Descrição da tarefa" />
+        <TaskInput onSubmit={handleSubmit}>
+          <Input
+            placeholder="Título da Tarefa"
+            onChange={handleTitleChange}
+            value={title}
+          />
+          <TextArea
+            placeholder="Descrição da tarefa"
+            value={description}
+            onChange={handleDescriptionChange}
+          />
           <Button type="submit" title="Cadastrar Nova Tarefa" />
         </TaskInput>
       </Sidebar>
@@ -166,7 +190,12 @@ function Home() {
               </div>
             ) : (
               tasks.map((task) => (
-                <TaskCard key={task.id} id={task.id} title={task.title} />
+                <TaskCard
+                  key={task._id}
+                  id={task._id}
+                  title={task.title}
+                  description={task.description}
+                />
               ))
             )}
           </TaskList>

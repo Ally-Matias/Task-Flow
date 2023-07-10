@@ -1,7 +1,16 @@
+import api from '../../utils/api'
 import { Button } from '../Button'
 import { Container, TaskTitle, TaskDescription } from './styles'
 
-export function TaskCard({ title, description }) {
+export function TaskCard({ id, title, description }) {
+  function handleRemoveTask(idTask) {
+    try {
+      api.delete(`/tasks/${idTask}`)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Container>
       <div
@@ -11,7 +20,7 @@ export function TaskCard({ title, description }) {
           marginBottom: '10px',
         }}
       >
-        <Button type="remove" />
+        <Button type="remove" onClick={() => handleRemoveTask(id)} />
         <Button type="edit" />
       </div>
 
