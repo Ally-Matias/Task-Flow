@@ -121,7 +121,7 @@ export const Title = styled.p`
 `
 
 export const TasksContainer = styled.div`
-  height: auto;
+  min-height: 240px;
 
   margin-top: 20px;
   margin-left: 60px;
@@ -131,6 +131,6 @@ export const TaskList = styled.div`
   width: auto;
   display: flex;
   flex: 3;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
 `

@@ -1,11 +1,11 @@
 import { ButtonDefault, ButtonRemove, ButtonEdit } from './styles'
 
-export function Button({ title, type = 'default', ...rest }) {
-  if (type === 'edit') {
+export function Button({ title, typeButton = 'default', ...rest }) {
+  if (typeButton === 'edit') {
     return <ButtonEdit {...rest}>Editar</ButtonEdit>
   }
 
-  if (type === 'remove') {
+  if (typeButton === 'remove') {
     return <ButtonRemove {...rest}>X</ButtonRemove>
   }
   return <ButtonDefault {...rest}>{title}</ButtonDefault>

@@ -19,9 +19,25 @@ export const TaskTitle = styled.h3`
 `
 
 export const TaskDescription = styled.p`
-  height: 164px;
+  min-height: 164px;
   margin-top: 16px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: wrap;
+`
+export const TextArea = styled.textarea`
+  max-width: 100%;
+  min-height: 100px;
+
+  margin-bottom: 10px;
+
+  padding: 5px 10px;
+
+  font-size: 15px;
+
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+
+  outline: none;
+
+  border-color: rgb(48, 52, 54);
 `

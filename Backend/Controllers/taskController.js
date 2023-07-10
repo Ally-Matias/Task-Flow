@@ -113,7 +113,7 @@ module.exports = class taskController {
   static async updateTaskById(req, res) {
     const id = req.params.id;
 
-    const { title, description, available, status } = req.body;
+    const { title, description, status } = req.body;
 
     const updatedData = {};
 

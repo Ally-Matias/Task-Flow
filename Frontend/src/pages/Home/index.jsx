@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom'
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 import api from '../../utils/api'
 
 import { Context } from '../../context/UserContext'
@@ -46,6 +49,8 @@ function Home() {
     event.preventDefault()
 
     createNewTask(title, description)
+    setDescription('')
+    setTitle('')
   }
 
   async function getMyTasks() {
@@ -64,13 +69,16 @@ function Home() {
 
   async function createNewTask(title, description) {
     try {
-      const { data } = await api.post('/tasks/create', {
+      await api.post('/tasks/create', {
         title,
         description,
       })
 
-      console.log('DATA => ', data)
-      // setTasks([...tasks, data.task])
+      toast.success('Tarefa criada com sucesso!', {
+        position: toast.POSITION.TOP_RIGHT,
+        hideProgressBar: false,
+        autoClose: 1000,
+      })
     } catch (error) {
       console.log('ERRO NA API => ', error)
     }
@@ -184,6 +192,7 @@ function Home() {
               <div
                 style={{
                   marginTop: '10%',
+                  marginInline: 'auto',
                 }}
               >
                 <h1 style={{ color: '#fff' }}>Nenhuma tarefa cadastrada</h1>
