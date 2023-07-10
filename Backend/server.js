@@ -21,7 +21,6 @@ const loadCertificado = async () => {
     console.log(chalk.red(`Erro ao ler os certificados: ${error}`));
   }
 }
-
 // Definição do app Express.
 const app = express();
 

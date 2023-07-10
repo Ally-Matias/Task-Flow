@@ -1,65 +1,61 @@
 import api from '../utils/api'
 
-import {useState, useEffect} from 'react'
-import {useHistory} from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 
-export default function useAuth(){
-    const [authenticated, setAuthenticated] = useState(false)
-    const history = useHistory()
+export default function useAuth() {
+  const [authenticated, setAuthenticated] = useState(false)
+  const history = useHistory()
 
-    useEffect(() =>{
+  useEffect(() => {
+    const token = localStorage.getItem('token')
 
-        const token = localStorage.getItem('token')
+    if (token) {
+      api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`
 
-        if(token){
-            api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`
-
-            setAuthenticated(true)
-        }
-
-    }, [])
-
-
-    async function SignUp(user){
-        try{
-            const data = await api.post('/users/register', user).then((response) =>{
-                return response.data
-            })
-            
-            await authUser(data)
-        } catch(error){
-            // tratar erro
-            console.log(error)
-        }
+      setAuthenticated(true)
     }
+  }, [])
 
-    async function login(user){
-        try {
-            const data = await api.post('/users/login', user).then((response) =>{
-                return response.data
-            })
+  async function SignUp(user) {
+    try {
+      const data = await api.post('/users/register', user).then((response) => {
+        return response.data
+      })
 
-            await authUser(data)
-        } catch (error) {
-            console.log(error)
-        }
+      await authUser(data)
+    } catch (error) {
+      // tratar erro
+      console.log(error)
     }
+  }
 
-    async function authUser(data){
-        setAuthenticated(true)
+  async function login(user) {
+    try {
+      const data = await api.post('/users/login', user).then((response) => {
+        return response.data
+      })
 
-        localStorage.setItem('token', JSON.stringify(data.token))
-
-        window.location.href = '/';
+      await authUser(data)
+    } catch (error) {
+      console.log(error)
     }
+  }
 
-    function logout(){
-        setAuthenticated(false)
-        localStorage.removeItem("token")
-        api.defaults.headers.Authorization = undefined
-        window.location.href = '/SignIn';
-    }
+  async function authUser(data) {
+    setAuthenticated(true)
 
-    return { authenticated, SignUp, logout, login }
+    localStorage.setItem('token', JSON.stringify(data.token))
+
+    window.location.href = '/'
+  }
+
+  function logout() {
+    setAuthenticated(false)
+    localStorage.removeItem('token')
+    api.defaults.headers.Authorization = undefined
+    window.location.href = '/SignIn'
+  }
+
+  return { authenticated, SignUp, logout, login }
 }
-

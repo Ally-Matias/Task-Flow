@@ -1,7 +1,16 @@
-import { Button } from '../Button';
-import { Container, TaskTitle, TaskDescription } from './styles';
+import api from '../../utils/api'
+import { Button } from '../Button'
+import { Container, TaskTitle, TaskDescription } from './styles'
 
-export function TaskCard() {
+export function TaskCard({ id, title, description }) {
+  function handleRemoveTask(idTask) {
+    try {
+      api.delete(`/tasks/${idTask}`)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Container>
       <div
@@ -11,20 +20,12 @@ export function TaskCard() {
           marginBottom: '10px',
         }}
       >
-        <Button type="remove" />
+        <Button type="remove" onClick={() => handleRemoveTask(id)} />
         <Button type="edit" />
       </div>
 
-      <TaskTitle>Titulo da Tarefa</TaskTitle>
-      <TaskDescription>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam quo
-        aliquam numquam ad odit ab debitis fugit architecto commodi beatae rem
-        non consequuntur odio officiis modi, delectus corporis laborum omnis?
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio
-        pariatur facere unde magni officiis numquam officia velit vitae fugiat,
-        eius quos, minima recusandae cum quaerat non. Quis tempora deserunt
-        accusantium?
-      </TaskDescription>
+      <TaskTitle>{title}</TaskTitle>
+      <TaskDescription>{description}</TaskDescription>
     </Container>
-  );
+  )
 }
