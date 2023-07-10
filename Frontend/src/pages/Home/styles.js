@@ -2,8 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
-  min-height: 100vh;
-  height: auto;
+  flex: 1;
 `
 
 export const Sidebar = styled.div`

@@ -1,9 +1,12 @@
 import api from '../utils/api'
 
 import { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 
 export default function useAuth() {
   const [authenticated, setAuthenticated] = useState(false)
+  const history = useHistory()
+
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -28,8 +31,16 @@ export default function useAuth() {
     }
   }
 
-  function login(user) {
-    console.log('Entrou na Login')
+  async function login(user) {
+    try {
+      const data = await api.post('/users/login', user).then((response) => {
+        return response.data
+      })
+
+      await authUser(data)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   async function authUser(data) {

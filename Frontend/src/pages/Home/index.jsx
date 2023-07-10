@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+
+import { Link } from 'react-router-dom'
 
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
-import { TaskCard } from '../../components/TaskCard'
-import { Link } from 'react-router-dom'
 
 import api from '../../utils/api'
 
@@ -24,24 +24,56 @@ import {
   TaskList,
 } from './styles'
 
+import { TaskCard } from '../../components/TaskCard'
+
 function Home() {
   const { authenticated, logout } = useContext(Context)
-
-  const [tasks, setTasks] = useState([])
-  const [token] = useState(localStorage.getItem('token'))
   const [buttonClicked, setButtonClicked] = useState(false)
+  const [tasks, setTasks] = useState([])
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const token = localStorage.getItem('token')
+
+  function handleTitleChange(event) {
+    setTitle(event.target.value)
+  }
+
+  // Função para lidar com a alteração da descrição
+  function handleDescriptionChange(event) {
+    setDescription(event.target.value)
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault()
+
+    createNewTask(title, description)
+  }
 
   async function getMyTasks() {
     try {
       const { data } = await api.get('/tasks/mytasks', {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${JSON.parse(token)}`,
         },
       })
 
       setTasks(data.tasks)
     } catch (error) {
-      console.log(error)
+      console.log('ERRO NA API => ', error)
+    }
+  }
+
+  async function createNewTask(title, description) {
+    try {
+      const { data } = await api.post('/tasks/create', {
+        title,
+        description,
+      })
+
+      console.log('DATA => ', data)
+      // setTasks([...tasks, data.task])
+    } catch (error) {
+      console.log('ERRO NA API => ', error)
     }
   }
 
@@ -61,7 +93,7 @@ function Home() {
         <LogoContainer>
           <a href="">
             <img
-              alt="icone do projeto"
+              alt="Logo principal do projeto"
               src="src/assets/img/favicon.ico"
               height="60"
               width="60"
@@ -77,9 +109,17 @@ function Home() {
           </h2>
         </LogoContainer>
 
-        <TaskInput>
-          <Input placeholder="Título da Tarefa" />
-          <TextArea placeholder="Descrição da tarefa" />
+        <TaskInput onSubmit={handleSubmit}>
+          <Input
+            placeholder="Título da Tarefa"
+            onChange={handleTitleChange}
+            value={title}
+          />
+          <TextArea
+            placeholder="Descrição da tarefa"
+            value={description}
+            onChange={handleDescriptionChange}
+          />
           <Button type="submit" title="Cadastrar Nova Tarefa" />
         </TaskInput>
       </Sidebar>
@@ -126,7 +166,7 @@ function Home() {
             <ButtonSearch>
               <a href="">
                 <img
-                  alt="icone de search"
+                  alt="Icone de uma lupa"
                   src="src/assets/img/search.png"
                   height="19"
                   width="19"
@@ -141,13 +181,24 @@ function Home() {
             <Title>Tarefas</Title>
           </div>
           <TaskList>
-            {tasks.map((task) => (
-              <TaskCard
-                key={task._id}
-                title={task.title}
-                description={task.description}
-              />
-            ))}
+            {tasks.length === 0 ? (
+              <div
+                style={{
+                  marginTop: '10%',
+                }}
+              >
+                <h1 style={{ color: '#fff' }}>Nenhuma tarefa cadastrada</h1>
+              </div>
+            ) : (
+              tasks.map((task) => (
+                <TaskCard
+                  key={task._id}
+                  id={task._id}
+                  title={task.title}
+                  description={task.description}
+                />
+              ))
+            )}
           </TaskList>
         </TasksContainer>
       </Main>

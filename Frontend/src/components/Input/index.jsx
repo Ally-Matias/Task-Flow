@@ -1,7 +1,5 @@
 import { TextInput } from './styles'
 
-export function Input({ placeholder, ...rest}) {
-  return (
-    <TextInput placeholder={placeholder} />
-  )
+export function Input({ placeholder, ...rest }) {
+  return <TextInput placeholder={placeholder} {...rest} />
 }
