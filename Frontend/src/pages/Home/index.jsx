@@ -49,8 +49,6 @@ function Home() {
     event.preventDefault()
 
     createNewTask(title, description)
-    setDescription('')
-    setTitle('')
   }
 
   async function getMyTasks() {
@@ -90,7 +88,7 @@ function Home() {
       })
 
       toast.success('Tarefa criada com sucesso!', {
-        position: toast.POSITION.TOP_CENTER,
+        position: toast.POSITION.TOP_RIGHT,
         hideProgressBar: false,
         autoClose: 1000,
       })
@@ -222,7 +220,6 @@ function Home() {
               <div
                 style={{
                   marginTop: '10%',
-                  marginInline: 'auto',
                 }}
               >
                 <h1 style={{ color: '#fff' }}>Nenhuma tarefa cadastrada</h1>
