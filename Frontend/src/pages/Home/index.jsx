@@ -88,10 +88,13 @@ function Home() {
       })
 
       toast.success('Tarefa criada com sucesso!', {
-        position: toast.POSITION.TOP_RIGHT,
+        position: toast.POSITION.TOP_CENTER,
         hideProgressBar: false,
         autoClose: 1000,
       })
+
+      setTitle('')
+      setDescription('')
     } catch (error) {
       let title = 'Erro interno, tente novamente mais tarde!'
 
@@ -123,45 +126,45 @@ function Home() {
   })
 
   return (
-    <Container>
-      <Sidebar>
-        <LogoContainer>
-          <a href="">
-            <img
-              alt="Logo principal do projeto"
-              src="src/assets/img/favicon.ico"
-              height="60"
-              width="60"
-            />
-          </a>
-          <h2
-            style={{
-              color: '#fff',
-              marginTop: '10px',
-            }}
-          >
-            Task Flow
-          </h2>
-        </LogoContainer>
+    <>
+      {authenticated ? (
+        <Container>
+          <Sidebar>
+            <LogoContainer>
+              <a href="">
+                <img
+                  alt="Logo principal do projeto"
+                  src="src/assets/img/favicon.ico"
+                  height="60"
+                  width="60"
+                />
+              </a>
+              <h2
+                style={{
+                  color: '#fff',
+                  marginTop: '10px',
+                }}
+              >
+                Task Flow
+              </h2>
+            </LogoContainer>
 
-        <TaskInput onSubmit={handleSubmit}>
-          <Input
-            placeholder="Título da Tarefa"
-            onChange={handleTitleChange}
-            value={title}
-          />
-          <TextArea
-            placeholder="Descrição da tarefa"
-            value={description}
-            onChange={handleDescriptionChange}
-          />
-          <Button type="submit" title="Cadastrar Nova Tarefa" />
-        </TaskInput>
-      </Sidebar>
+            <TaskInput onSubmit={handleSubmit}>
+              <Input
+                placeholder="Título da Tarefa"
+                onChange={handleTitleChange}
+                value={title}
+              />
+              <TextArea
+                placeholder="Descrição da tarefa"
+                value={description}
+                onChange={handleDescriptionChange}
+              />
+              <Button type="submit" title="Cadastrar Nova Tarefa" />
+            </TaskInput>
+          </Sidebar>
 
-      <Main>
-        {authenticated ? (
-          <>
+          <Main>
             <button
               style={{
                 Width: '30px',
@@ -182,62 +185,81 @@ function Home() {
             >
               Sair
             </button>
-          </>
-        ) : (
+
+            <Header>
+              <div
+                style={{
+                  display: 'flex',
+                }}
+              >
+                <Input placeholder="Pesquisar Tarefa" />
+                <ButtonSearch>
+                  <a href="">
+                    <img
+                      alt="Icone de uma lupa"
+                      src="src/assets/img/search.png"
+                      height="19"
+                      width="19"
+                    />
+                  </a>
+                </ButtonSearch>
+              </div>
+            </Header>
+
+            <TasksContainer>
+              <div>
+                <Title>Tarefas</Title>
+              </div>
+              <TaskList>
+                {tasks.length === 0 ? (
+                  <div
+                    style={{
+                      marginTop: '10%',
+                      marginInlineStart: '34%',
+                    }}
+                  >
+                    <h1 style={{ color: '#fff' }}>Nenhuma tarefa cadastrada</h1>
+                  </div>
+                ) : (
+                  tasks.map((task) => (
+                    <TaskCard
+                      key={task._id}
+                      id={task._id}
+                      title={task.title}
+                      description={task.description}
+                    />
+                  ))
+                )}
+              </TaskList>
+            </TasksContainer>
+          </Main>
+        </Container>
+      ) : (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            alignItems: 'center',
+            height: '100vh',
+            width: '100vw',
+          }}
+        >
+          <h1 style={{ color: '#fff' }}>Você não está logado!</h1>
           <Link to="/SignIn">
-            <ButtonLogin onClick={() => setButtonClicked(true)}>
+            <ButtonLogin
+              style={{
+                width: '300px',
+                height: '50px',
+              }}
+              onClick={() => setButtonClicked(true)}
+            >
               Login
             </ButtonLogin>
           </Link>
-        )}
-
-        <Header>
-          <div
-            style={{
-              display: 'flex',
-            }}
-          >
-            <Input placeholder="Pesquisar Tarefa" />
-            <ButtonSearch>
-              <a href="">
-                <img
-                  alt="Icone de uma lupa"
-                  src="src/assets/img/search.png"
-                  height="19"
-                  width="19"
-                />
-              </a>
-            </ButtonSearch>
-          </div>
-        </Header>
-
-        <TasksContainer>
-          <div>
-            <Title>Tarefas</Title>
-          </div>
-          <TaskList>
-            {tasks.length === 0 ? (
-              <div
-                style={{
-                  marginTop: '10%',
-                }}
-              >
-                <h1 style={{ color: '#fff' }}>Nenhuma tarefa cadastrada</h1>
-              </div>
-            ) : (
-              tasks.map((task) => (
-                <TaskCard
-                  key={task._id}
-                  id={task._id}
-                  title={task.title}
-                  description={task.description}
-                />
-              ))
-            )}
-          </TaskList>
-        </TasksContainer>
-      </Main>
-    </Container>
+        </div>
+      )}
+    </>
   )
 }
 
