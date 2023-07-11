@@ -63,7 +63,22 @@ function Home() {
 
       setTasks(data.tasks)
     } catch (error) {
-      console.log('ERRO NA API => ', error)
+      let title = 'Erro interno, tente novamente mais tarde!'
+
+      if (error.response?.data?.error) {
+        title = error.response.data.error
+        toast.error(title, {
+          position: toast.POSITION.TOP_CENTER,
+          hideProgressBar: false,
+          autoClose: 1000,
+        })
+      } else {
+        toast.error(title, {
+          position: toast.POSITION.TOP_CENTER,
+          hideProgressBar: false,
+          autoClose: 1000,
+        })
+      }
     }
   }
 
@@ -75,12 +90,27 @@ function Home() {
       })
 
       toast.success('Tarefa criada com sucesso!', {
-        position: toast.POSITION.TOP_RIGHT,
+        position: toast.POSITION.TOP_CENTER,
         hideProgressBar: false,
         autoClose: 1000,
       })
     } catch (error) {
-      console.log('ERRO NA API => ', error)
+      let title = 'Erro interno, tente novamente mais tarde!'
+
+      if (error.response?.data?.error) {
+        title = error.response.data.error
+        toast.error(title, {
+          position: toast.POSITION.TOP_CENTER,
+          hideProgressBar: false,
+          autoClose: 1000,
+        })
+      } else {
+        toast.error(title, {
+          position: toast.POSITION.TOP_CENTER,
+          hideProgressBar: false,
+          autoClose: 1000,
+        })
+      }
     }
   }
 
