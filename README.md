@@ -12,6 +12,11 @@
 </div>
 
 ---
+## 🔴 Clique na imagem para ver o vídeo do projeto:
+
+[![Texto alternativo](https://github.com/Ally-Matias/Task-Flow/blob/master/Frontend/src/assets/img/Screenshot%20from%202023-07-12%2014-29-28.png)](https://youtu.be/biLjNwEFt6Y)
+
+---
 
 ## 🚀 Execução:
 
