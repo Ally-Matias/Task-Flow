@@ -5,14 +5,14 @@ require('dotenv').config();
 const cors = require('cors');
 const helmet = require('helmet');
 const express = require('express');
-const http = require('http');
+const https = require('https');
 const { Server } = require('socket.io');
 
 // Import do certificado e key SSL/TLS.
 const loadCertificado = async () => {
   try {
-    const cert = await fs.readFileSync(path.join(__dirname, 'Certificate', 'certificate.crt'));
-    const key = await fs.readFileSync(path.join(__dirname, 'Certificate', 'certificate.key'));
+    const cert = await fs.readFileSync(path.join(__dirname, 'Certificate', 'taskflow.crt'));
+    const key = await fs.readFileSync(path.join(__dirname, 'Certificate', 'taskflow.key'));
     return {
       cert,
       key
@@ -33,6 +33,9 @@ app.use(cors({credentials: true, origin: 'https://172.25.0.2:5173'}));
 
 // Configuração para o retorno de JSON.
 app.use(express.json());
+
+// Pasta pública para as imagens dos usuários.
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Rotas
 const userRoutes = require('./routes/userRoutes');
@@ -56,7 +59,7 @@ const initServer = async () => {
       key
     };
     
-    const server = http.createServer(app);
+    const server = https.createServer(options, app);
     const io = new Server(server);
 
     // Evento de conexão do Socket.IO.

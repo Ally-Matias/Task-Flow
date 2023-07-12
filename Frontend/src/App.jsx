@@ -8,8 +8,7 @@ import SignUp from './pages/SignUp'
 import { ToastContainer } from 'react-toastify'
 
 // context
-
-import { UserProvider } from "./context/UserContext"
+import { UserProvider } from './context/UserContext'
 
 function App() {
   return (
@@ -21,7 +20,7 @@ function App() {
           <Route path="/SignIn">
             <SignIn />
           </Route>
-          <Route path="/SignUp"> 
+          <Route path="/SignUp">
             <SignUp />
           </Route>
           <Route path="/">
@@ -30,7 +29,7 @@ function App() {
         </Switch>
       </UserProvider>
     </Router>
-  );
+  )
 }
 
 export default App
