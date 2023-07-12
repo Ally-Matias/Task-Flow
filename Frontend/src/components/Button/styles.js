@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const ButtonRemove = styled.button`
   min-width: 30px;
@@ -19,7 +19,7 @@ export const ButtonRemove = styled.button`
     background: #0d1321;
     color: #d90429;
   }
-`;
+`
 
 export const ButtonEdit = styled.button`
   min-width: 50px;
@@ -40,7 +40,7 @@ export const ButtonEdit = styled.button`
     background: #0d1321;
     color: #2c0b8e;
   }
-`;
+`
 
 export const ButtonDefault = styled.button`
   min-width: 130px;
@@ -61,4 +61,4 @@ export const ButtonDefault = styled.button`
     background: #1e1e1e;
     color: #57cc99;
   }
-`;
+`

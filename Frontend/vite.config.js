@@ -4,11 +4,12 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  // server:{
-  //   https:{
-  //     key: path.resolve(__dirname, 'Certificate/frontend.key'),
-  //     cert: path.resolve(__dirname, 'Certificate/frontend.crt'),
-  //   },
-  // },
+  server: {
+    https: {
+      rejectUnauthorized: false,
+      key: path.resolve(__dirname, 'Certificate/taskflow.key'),
+      cert: path.resolve(__dirname, 'Certificate/taskflow.crt'),
+    },
+  },
   plugins: [react()],
 })

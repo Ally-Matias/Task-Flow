@@ -9,18 +9,19 @@ const http = require('http');
 const { Server } = require('socket.io');
 
 // Import do certificado e key SSL/TLS.
-// const loadCertificado = async () => {
-//   try {
-//     const cert = await fs.readFileSync(path.join(__dirname, 'Certificate', 'backend.crt'));
-//     const key = await fs.readFileSync(path.join(__dirname, 'Certificate', 'backend.key'));
-//     return {
-//       cert,
-//       key
-//     };
-//   } catch (error) {
-//     console.log(chalk.red(`Erro ao ler os certificados: ${error}`));
-//   }
-// }
+const loadCertificado = async () => {
+  try {
+    const cert = await fs.readFileSync(path.join(__dirname, 'Certificate', 'taskflow.crt'));
+    const key = await fs.readFileSync(path.join(__dirname, 'Certificate', 'taskflow.key'));
+    return {
+      cert,
+      key
+    };
+  } catch (error) {
+    console.log(chalk.red(`Erro ao ler os certificados: ${error}`));
+  }
+}
+
 // Definição do app Express.
 const app = express();
 
@@ -28,7 +29,7 @@ const app = express();
 app.use(helmet());
 
 // Configuração do CORS.
-app.use(cors({credentials: true, origin: 'http://192.168.194.51:5173'}));
+app.use(cors({credentials: true, origin: 'https://172.25.0.2:5173'}));
 
 // Configuração para o retorno de JSON.
 app.use(express.json());
@@ -46,14 +47,14 @@ app.use('/tasks', tasksRoutes);
 
 const initServer = async () => {
   try {
-    // const {
-    //   cert,
-    //   key
-    // } = await loadCertificado();
-    // const options = {
-    //   cert,
-    //   key
-    // };
+    const {
+      cert,
+      key
+    } = await loadCertificado();
+    const options = {
+      cert,
+      key
+    };
     
     const server = http.createServer(app);
     const io = new Server(server);
