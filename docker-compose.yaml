@@ -1,0 +1,29 @@
+version: '3'
+services:
+  frontend:
+    build: ./Frontend
+    ports:
+      - 5173:5173
+    networks:
+      my_network:
+        ipv4_address: 172.25.0.2
+
+  backend:
+    build: ./Backend
+    networks:
+      my_network:
+        ipv4_address: 172.25.0.4
+
+  database:
+    image: mongo
+    networks:
+      my_network:
+        ipv4_address: 172.25.0.3
+
+networks:
+  my_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.25.0.0/24
