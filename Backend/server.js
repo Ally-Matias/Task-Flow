@@ -11,8 +11,8 @@ const { Server } = require('socket.io');
 // Import do certificado e key SSL/TLS.
 const loadCertificado = async () => {
   try {
-    const cert = await fs.readFileSync(path.join(__dirname, 'Certificate', 'taskflow.crt'));
-    const key = await fs.readFileSync(path.join(__dirname, 'Certificate', 'taskflow.key'));
+    const cert = await fs.readFileSync(path.join(__dirname, 'Certificate', 'certificate.crt'));
+    const key = await fs.readFileSync(path.join(__dirname, 'Certificate', 'certificate.key'));
     return {
       cert,
       key
