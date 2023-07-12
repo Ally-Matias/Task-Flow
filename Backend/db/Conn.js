@@ -3,7 +3,7 @@ const chalk = require('chalk');
 
 async function main() {
   // Conecta ao banco de dados MongoDB usando a URL 'mongodb://localhost:27017/taskflow'.
-  await mongoose.connect('mongodb://localhost:27017/taskflow');
+  await mongoose.connect('mongodb://database:27017/taskflow');
   console.log(chalk.blue('Conectou ao Mongoose!'));
 }
 

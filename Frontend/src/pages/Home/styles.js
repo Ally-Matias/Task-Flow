@@ -9,6 +9,7 @@ export const Sidebar = styled.div`
   display: flex;
   flex-direction: column;
 
+  width: 13%;
   min-width: 13%;
   max-width: auto;
   min-height: 100vh;
@@ -38,6 +39,7 @@ export const TaskInput = styled.form`
 
 export const TextArea = styled.textarea`
   max-width: 100%;
+  min-width: 100%;
   min-height: 6.25rem;
   max-height: 6.25rem;
 
@@ -121,7 +123,7 @@ export const Title = styled.p`
 `
 
 export const TasksContainer = styled.div`
-  min-height: 240px;
+  min-height: auto;
 
   margin-top: 20px;
   margin-left: 60px;

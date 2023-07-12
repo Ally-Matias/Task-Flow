@@ -27,7 +27,7 @@ export function TaskCard({ id, title, description }) {
     event.preventDefault()
 
     const confirmDelete = window.confirm(
-      'Tem certeza que deseja excluir esta tarefa?',
+      'Tem certeza que deseja alterar esta tarefa?',
     )
 
     if (confirmDelete) {
@@ -44,25 +44,59 @@ export function TaskCard({ id, title, description }) {
       })
 
       toast.success('Tarefa editada com sucesso!', {
-        position: toast.POSITION.TOP_RIGHT,
+        position: toast.POSITION.TOP_CENTER,
         hideProgressBar: false,
         autoClose: 1000,
       })
     } catch (error) {
+      let title = 'Erro ao editar tarefa, tente novamente mais tarde!'
+
+      if (error.response?.data?.error) {
+        title = error.response.data.error
+        toast.error(title, {
+          position: toast.POSITION.TOP_CENTER,
+          hideProgressBar: false,
+          autoClose: 1000,
+        })
+      } else {
+        toast.error(title, {
+          position: toast.POSITION.TOP_CENTER,
+          hideProgressBar: false,
+          autoClose: 1000,
+        })
+      }
+
       console.log(error)
     }
   }
 
-  function handleRemoveTask(idTask) {
+  async function handleRemoveTask(idTask) {
     try {
-      api.delete(`/tasks/${idTask}`)
+      await api.delete(`/tasks/${idTask}`)
 
       toast.success('Tarefa excluída com sucesso!', {
-        position: toast.POSITION.TOP_RIGHT,
+        position: toast.POSITION.TOP_CENTER,
         hideProgressBar: false,
         autoClose: 1000,
       })
     } catch (error) {
+      let title = 'Erro ao remover a tarefa, tente novamente mais tarde!'
+
+      if (error.response?.data?.error) {
+        title = error.response.data.error
+        toast.error(title, {
+          position: toast.POSITION.TOP_CENTER,
+          hideProgressBar: false,
+          autoClose: 1000,
+        })
+      } else {
+        toast.error(title, {
+          position: toast.POSITION.TOP_CENTER,
+          hideProgressBar: false,
+          autoClose: 1000,
+        })
+      }
+
       console.log(error)
     }
   }

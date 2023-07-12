@@ -7,8 +7,8 @@ export default defineConfig({
   server: {
     https: {
       rejectUnauthorized: false,
-      key: path.resolve(__dirname, 'Certificate/frontend.key'),
-      cert: path.resolve(__dirname, 'Certificate/frontend.crt'),
+      key: path.resolve(__dirname, 'Certificate/taskflow.key'),
+      cert: path.resolve(__dirname, 'Certificate/taskflow.crt'),
     },
   },
   plugins: [react()],
