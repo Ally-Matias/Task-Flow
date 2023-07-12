@@ -20,12 +20,13 @@
 
 ## 🚀 Execução:
 
-1. Faça um clone desse repositório rodando: <br> `git clone https://github.com/Ally-Matias/Task-Flow.git`;
+1. Faça um clone desse repositório rodando: `git clone https://github.com/Ally-Matias/Task-Flow.git`;
 2. Entre na pasta rodando pelo terminal: `cd Task-Flow`;
 3. Rode `npm install` para instalar as dependências do projeto;
 4. Rode na pasta FrontEnd `npm run dev` para iniciar o frontend do projeto.
-5. Para rodar o banco de dados, o MongoDB pode ser executado em um contêiner do Docker, após instalar e configurar o mesmo, use esse comando para iniciar: `sudo docker run -p 27017:27017 -d mongo`
-6. Rode na pasta BackEnd `nodemon server.js` para iniciar o backend do projeto.
+5. Acrescente também na pasta Backend um arquivo `.env` com esse conteúdo `BCRYPT_SECRET=D35CUBR4537ORC@P@Z!`
+6. Para rodar o banco de dados, o MongoDB pode ser executado em um contêiner do Docker, após instalar e configurar o mesmo, use esse comando para iniciar: `sudo docker run -p 27017:27017 -d mongo`
+7. Rode na pasta BackEnd `nodemon server.js` para iniciar o backend do projeto.
    
 ---
 
